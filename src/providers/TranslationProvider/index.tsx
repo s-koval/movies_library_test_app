@@ -1,9 +1,10 @@
 "use client";
 
-import { I18nextProvider } from "react-i18next";
-import initTranslations from "@core/app/i18n";
 import { createInstance, Resource } from "i18next";
 import { FC, PropsWithChildren } from "react";
+import { I18nextProvider } from "react-i18next";
+
+import initTranslations from "@core/app/i18n";
 
 type TTranslationProviderProps = {
   locale: string;

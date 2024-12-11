@@ -1,7 +1,9 @@
 "use client";
 
-import { TIconProps } from "@core/types/icons";
 import { FC } from "react";
+
+import { TIconProps } from "@core/types/icons";
+
 import Styled from "./styled";
 
 const CheckBoxChecked: FC<TIconProps> = ({

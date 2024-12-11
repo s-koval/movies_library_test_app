@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 import { TStyledTypographyProps } from "@core/types/components/Typography";
+
 import getVariant from "./utils/get-variant";
 
 const Typography = styled.span<TStyledTypographyProps>((props) => {

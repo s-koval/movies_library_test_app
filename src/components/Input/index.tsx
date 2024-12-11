@@ -1,6 +1,7 @@
 "use client";
 
 import { FC, InputHTMLAttributes, useId } from "react";
+
 import Styled from "./styled";
 
 type TInputProps = InputHTMLAttributes<HTMLInputElement>;

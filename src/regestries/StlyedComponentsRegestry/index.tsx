@@ -1,8 +1,9 @@
 "use client";
 
-import { useServerInsertedHTML } from "next/navigation";
 import React, { FC, PropsWithChildren, useState } from "react";
 import { ServerStyleSheet, StyleSheetManager } from "styled-components";
+
+import { useServerInsertedHTML } from "next/navigation";
 
 const StlyedComponentsRegestry: FC<PropsWithChildren> = ({ children }) => {
   const [styleSheets] = useState(() => new ServerStyleSheet());

@@ -1,10 +1,13 @@
 "use client";
 
 import React, { FC, InputHTMLAttributes } from "react";
-import Styled from "./styled";
+
 import CheckBoxChecked from "@core/icons/CheckBoxChecked";
 import CheckBoxUnchecked from "@core/icons/CheckBoxUnchecked";
+
 import Typography from "../Typography";
+
+import Styled from "./styled";
 
 type TCheckBoxProps = InputHTMLAttributes<HTMLInputElement> & {
   label?: string;

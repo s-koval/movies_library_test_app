@@ -1,6 +1,7 @@
 import React, { FC, HTMLAttributes, PropsWithChildren } from "react";
 
 import { TTypographyStylesProps } from "@core/types/components/Typography";
+
 import Styled from "./styled";
 
 type TTypographyProps = PropsWithChildren & {

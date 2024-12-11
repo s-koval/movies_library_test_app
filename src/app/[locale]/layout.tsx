@@ -1,7 +1,8 @@
-import ThemeProvider from "@core/providers/ThemeProvider";
 import type { Metadata } from "next";
 
 import { Montserrat } from "next/font/google";
+
+import ThemeProvider from "@core/providers/ThemeProvider";
 
 const monserrat = Montserrat({
   subsets: ["latin"],

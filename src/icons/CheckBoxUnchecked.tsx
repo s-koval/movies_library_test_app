@@ -1,5 +1,7 @@
-import { TIconProps } from "@core/types/icons";
 import { FC } from "react";
+
+import { TIconProps } from "@core/types/icons";
+
 import Styled from "./styled";
 
 const CheckBoxUnchecked: FC<TIconProps> = ({

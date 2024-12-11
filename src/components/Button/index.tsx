@@ -1,8 +1,10 @@
 "use client";
 
 import { ButtonHTMLAttributes, FC } from "react";
-import Styled from "./styled";
+
 import { TButtonStylesProps } from "@core/types/components/Button";
+
+import Styled from "./styled";
 
 type TButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
   Partial<TButtonStylesProps>;

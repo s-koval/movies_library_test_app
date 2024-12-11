@@ -1,7 +1,10 @@
-import { TStyledButtonProps } from "@core/types/components/Button";
 import styled from "styled-components";
-import { getBasicStyles } from "./utils";
+
+import { TStyledButtonProps } from "@core/types/components/Button";
 import { TBasicNumberKeys } from "@core/types/theme";
+
+import { getBasicStyles } from "./utils";
+
 
 const Button = styled.button<TStyledButtonProps>((props) => {
   const basicStyles = getBasicStyles({

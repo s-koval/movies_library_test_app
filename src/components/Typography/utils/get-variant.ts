@@ -1,4 +1,5 @@
 import theme from "@core/theme";
+
 import { TTypographyKeys } from "@core/types/theme";
 
 const getVariant = (variant: TTypographyKeys) => {
