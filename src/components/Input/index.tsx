@@ -4,15 +4,17 @@ import { FC, InputHTMLAttributes, useId } from "react";
 
 import Styled from "./styled";
 
-type TInputProps = InputHTMLAttributes<HTMLInputElement>;
+type TInputProps = InputHTMLAttributes<HTMLInputElement> & {
+  label?: string;
+};
 
-const Input: FC<TInputProps> = ({ ...rest }) => {
+const Input: FC<TInputProps> = ({ label = "Label", value, ...rest }) => {
   const id = useId();
 
   return (
     <Styled.Input.Wrapper>
-      <Styled.Input.Label htmlFor={id}>My label</Styled.Input.Label>
-      <Styled.Input {...rest} id={id} />
+      <Styled.Input {...rest} id={id} value={value} />
+      <Styled.Input.Label htmlFor={id}>{label}</Styled.Input.Label>
     </Styled.Input.Wrapper>
   );
 };

@@ -10,7 +10,7 @@ const InputWrapper = styled.div(
 
     &:focus-within {
         ${InputLabel} {
-            inset: -6px 0 0;
+            inset: 0 0 0;
 
             font-size: ${props.theme.font.size["body-xs"]};
             font-weight: ${props.theme.font.weight["regular"]};
@@ -36,6 +36,13 @@ const InputLabel = styled.label(
     font-weight: ${props.theme.font.weight["regular"]};
     line-height: ${props.theme.font.lineHeight["body-sm"]};
 
+    ${Input}:not([value=""]) ~ & {
+        inset: 0 0 0;
+
+        font-size: ${props.theme.font.size["body-xs"]};
+        font-weight: ${props.theme.font.weight["regular"]};
+        line-height: ${props.theme.font.lineHeight["body-xs"]};
+    }
 `
 );
 

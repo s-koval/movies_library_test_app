@@ -1,0 +1,12 @@
+{
+  "title": "Login",
+  "email": {
+    "label": "Email"
+  },
+  "password": {
+    "label": "Password"
+  },
+  "rememberMe": {
+    "label": "Remember me"
+  }
+}

@@ -4,6 +4,6 @@ const i18nConfig = {
   prefixDefault: true,
 };
 
-export const i18nNamespaces = ["home"];
+export const i18nNamespaces = ["login"];
 
 export default i18nConfig;

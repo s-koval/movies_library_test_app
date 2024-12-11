@@ -26,7 +26,9 @@ const CheckBox: FC<TCheckBoxProps> = ({
       ) : (
         <CheckBoxUnchecked color="secondary" size={18} />
       )}
-      <Typography brightness={0}>{label}</Typography>
+      <Typography brightness={0} variant="body-sm">
+        {label}
+      </Typography>
     </Styled.CheckBox.Label>
   );
 };
