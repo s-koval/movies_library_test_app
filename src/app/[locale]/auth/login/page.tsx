@@ -1,7 +1,9 @@
+"use client";
+
 import { FC } from "react";
 
 const LoginPage: FC = () => {
-  return <div>LoginPage</div>;
+  return <div></div>;
 };
 
 export default LoginPage;

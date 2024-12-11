@@ -15,7 +15,7 @@ type TUnitKeys = "px" | "em" | "rem";
 
 export type TUnits = `${number}${TUnitKeys}`;
 
-export type TBrightness = TBasicNumberKeys;
+export type TBrightness = 0 | TBasicNumberKeys;
 
 export type TVariant = "contained" | "outlined" | "text";
 

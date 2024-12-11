@@ -2,6 +2,7 @@ import { TColors } from "@core/types/theme/colors";
 
 export const colors: TColors = {
   error: {
+    0: "",
     100: "",
     200: "",
     300: "",
@@ -13,6 +14,7 @@ export const colors: TColors = {
     900: "",
   },
   neutral: {
+    0: "#ffffff",
     100: "#f5f5f5",
     200: "",
     300: "#d4d4d4",
@@ -24,6 +26,7 @@ export const colors: TColors = {
     900: "#171717",
   },
   success: {
+    0: "",
     100: "",
     200: "",
     300: "",
@@ -35,6 +38,7 @@ export const colors: TColors = {
     900: "#14532d",
   },
   warning: {
+    0: "",
     100: "",
     200: "",
     300: "",
@@ -46,17 +50,19 @@ export const colors: TColors = {
     900: "#78350f",
   },
   primary: {
+    0: "",
     100: "",
     200: "",
     300: "",
     400: "#2BD17E",
-    500: "",
+    500: "#22c55e",
     600: "",
     700: "",
     800: "",
     900: "",
   },
   secondary: {
+    0: "",
     100: "",
     200: "",
     300: "",
