@@ -8,10 +8,12 @@ import {
   ACCESS_TOKEN_DEFAULT_EXPIRY,
   REFRESH_TOKEN_DEFAULT_EXPIRY,
 } from "@core/constants/services/auth";
+import { ErrorService } from "@core/services/error";
 
 const IS_PRODUCTION = process.env.NODE_ENV === "production";
 
 const authService = new AuthService();
+const errorService = new ErrorService();
 
 export async function POST(req: NextRequest) {
   try {
@@ -45,18 +47,8 @@ export async function POST(req: NextRequest) {
 
     return response;
   } catch (err) {
-    console.log(err);
+    const { message, status } = errorService.process(err);
 
-    if (err instanceof yup.ValidationError) {
-      return NextResponse.json(
-        { message: err.errors.join(", ") },
-        { status: 422 }
-      );
-    }
-
-    return NextResponse.json(
-      { message: "Something went wrong" },
-      { status: 500 }
-    );
+    return NextResponse.json({ message }, { status });
   }
 }
