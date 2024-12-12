@@ -18,15 +18,19 @@ export const middleware = async (req: NextRequest) => {
 
   const locale = req.nextUrl.pathname.split("/")[1];
 
-  const isPublic = i18nConfig.locales.some((locale) =>
+  const isAuth = i18nConfig.locales.some((locale) =>
     req.nextUrl.pathname.startsWith(`/${locale}/auth/`)
   );
 
-  if (isPublic) {
-    return NextResponse.next();
-  }
-
   const accessToken = req.cookies.get("accessToken");
+
+  if (isAuth) {
+    if (accessToken) {
+      return NextResponse.redirect(new URL(`/${locale}`, req.nextUrl));
+    } else {
+      return NextResponse.next();
+    }
+  }
 
   try {
     if (!accessToken) {

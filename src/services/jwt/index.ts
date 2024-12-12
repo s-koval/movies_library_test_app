@@ -1,6 +1,6 @@
 import { IJwtService } from "@core/interfaces/services/jwt";
-import { TJwtPayload } from "@core/types/services/jwt";
-import { SignJWT, JWTPayload } from "jose";
+import { TJwtPayload, TJwtVerifyResult } from "@core/types/services/jwt";
+import { SignJWT, jwtVerify } from "jose";
 
 export class JwtService implements IJwtService {
   private readonly jwtSecret: Uint8Array;
@@ -19,6 +19,10 @@ export class JwtService implements IJwtService {
     return await new SignJWT(payload)
       .setProtectedHeader({ alg: "HS256" })
       .sign(this.jwtSecret);
+  }
+
+  async verify<T>(token: string): Promise<TJwtVerifyResult<T>> {
+    return await jwtVerify<T>(token, this.jwtSecret);
   }
 
   getExpirationTime(time: number) {

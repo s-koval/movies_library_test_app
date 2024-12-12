@@ -55,6 +55,21 @@ const eslintConfig = [
             position: "after",
           },
           {
+            pattern: "@core/services/**",
+            group: "internal",
+            position: "after",
+          },
+          {
+            pattern: "@core/locale/**",
+            group: "internal",
+            position: "after",
+          },
+          {
+            pattern: "@core/middlewares/**",
+            group: "internal",
+            position: "after",
+          },
+          {
             pattern: "@core/constants/**",
             group: "internal",
             position: "after",

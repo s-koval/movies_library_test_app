@@ -8,6 +8,17 @@ datasource db {
 }
 
 model User {
-  email    String @unique @db.VarChar
-  password String @db.VarChar
+  id       String  @unique @default(uuid()) @db.Uuid
+  email    String  @unique @db.VarChar
+  password String  @db.VarChar
+  movies   Movie[]
+}
+
+model Movie {
+  id          String @unique @default(uuid()) @db.Uuid
+  title       String @db.VarChar
+  publishYear Int    @db.SmallInt
+  image       String @db.VarChar
+  user        User   @relation(fields: [userId], references: [id])
+  userId      String @db.Uuid
 }

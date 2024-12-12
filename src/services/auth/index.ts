@@ -12,6 +12,7 @@ import {
   REFRESH_TOKEN_DEFAULT_EXPIRY,
 } from "@core/constants/services/auth";
 import { HashService } from "../hash";
+import { TUserJwtPayload } from "@core/types/services/user";
 
 export class AuthService implements IAuthService {
   private readonly userService = new UserService();
@@ -25,7 +26,7 @@ export class AuthService implements IAuthService {
       },
       select: {
         password: true,
-        email: true,
+        id: true,
       },
     });
 
@@ -43,15 +44,15 @@ export class AuthService implements IAuthService {
     }
 
     return await this.generateTokens(
-      user,
+      { id: user.id },
       props.rememberMe
         ? REFRESH_TOKEN_DEFAULT_EXPIRY * 7
         : REFRESH_TOKEN_DEFAULT_EXPIRY
     );
   }
 
-  async generateTokens<T extends object>(
-    payload: T,
+  async generateTokens(
+    payload: TUserJwtPayload,
     refreshTTL: number = REFRESH_TOKEN_DEFAULT_EXPIRY
   ): Promise<TGenerateTokensReturnType> {
     const accessExpiry = this.jwtService.getExpirationTime(
