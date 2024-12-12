@@ -1,35 +1,50 @@
-import authGuard from "@core/guards/auth";
-import { MovieService } from "@core/services/movie";
-import { TAuthRequest } from "@core/types/api";
 import { NextResponse } from "next/server";
-import { errorMiddleware } from "@core/middlewares/error";
+
+import authGuard from "@core/guards/auth";
 import createMovieSchema from "@core/validation/movies/create";
+
 import { FileService } from "@core/services/file";
+import { MovieService } from "@core/services/movie";
+
+import { errorMiddleware } from "@core/middlewares/error";
+
+import { TAuthRequest } from "@core/types/api";
+
+
 
 const movieService = new MovieService();
 const fileService = new FileService();
 
 const GET = async (req: TAuthRequest) => {
-  const movies = await movieService.findMany({
-    where: {
-      userId: req.user.id,
-    },
-  });
+  const where = {
+    userId: req.user.id,
+  };
 
-  return NextResponse.json({ movies });
+  const [movies, total] = await Promise.all([
+    movieService.findMany({
+      where,
+    }),
+    movieService.count({ where }),
+  ]);
+
+  return NextResponse.json({ movies, total });
 };
 
 const POST = async (req: TAuthRequest) => {
-  const body = await req.formData();
+  const formData = await req.formData();
 
-  const dto = await createMovieSchema.validate(body);
+  const parsed = Object.fromEntries(formData.entries());
+
+  console.log(parsed);
+
+  const dto = await createMovieSchema.validate(parsed);
 
   const fileName = await fileService.upload(dto.image);
 
   await movieService.create({
     data: {
       title: dto.title,
-      publishYear: dto.publishYear,
+      publishYear: parseInt(dto.publishYear),
       image: fileName,
       userId: req.user.id,
     },

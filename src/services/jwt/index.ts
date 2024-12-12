@@ -1,6 +1,8 @@
-import { IJwtService } from "@core/interfaces/services/jwt";
-import { TJwtPayload, TJwtVerifyResult } from "@core/types/services/jwt";
 import { SignJWT, jwtVerify } from "jose";
+
+import { TJwtPayload, TJwtVerifyResult } from "@core/types/services/jwt";
+
+import { IJwtService } from "@core/interfaces/services/jwt";
 
 export class JwtService implements IJwtService {
   private readonly jwtSecret: Uint8Array;

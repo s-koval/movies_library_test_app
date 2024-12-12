@@ -1,8 +1,11 @@
+import { ValidationError } from "yup";
+
 import { NextResponse } from "next/server";
+
+import { JwtNotFound } from "@core/exceptions/jwt";
+
 import { InvalidEmailOrPasswordError } from "../exceptions/auth/invalid-email-or-password";
 import { TAuthRequest, TNextHandler } from "../types/api";
-import { ValidationError } from "yup";
-import { JwtNotFound } from "@core/exceptions/jwt";
 
 export const errorMiddleware = (handler: TNextHandler) => {
   return async (req: TAuthRequest) => {

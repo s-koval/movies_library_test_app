@@ -1,5 +1,7 @@
 import { JwtNotFound } from "@core/exceptions/jwt";
+
 import { JwtService } from "@core/services/jwt";
+
 import { TAuthRequest, TNextHandler } from "@core/types/api";
 import { TUserJwtPayload } from "@core/types/services/user";
 

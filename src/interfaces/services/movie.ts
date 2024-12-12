@@ -1,5 +1,6 @@
 import {
   TMovie,
+  TMovieCountProps,
   TMovieCreateProps,
   TMovieFindByProps,
   TMovieFindManyProps,
@@ -11,4 +12,5 @@ export interface IMovieService {
   findBy(props: TMovieFindByProps): Promise<TMovie | null>;
   findMany(props: TMovieFindManyProps): Promise<TMovie[]>;
   update(props: TMovieUpdateProps): Promise<void>;
+  count(props: TMovieCountProps): Promise<number>;
 }

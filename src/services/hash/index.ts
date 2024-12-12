@@ -1,6 +1,8 @@
-import { IHashService } from "@core/interfaces/services/hash";
-import { TCompareProps } from "@core/types/services/hash";
 import * as bcrypt from "bcrypt";
+
+import { TCompareProps } from "@core/types/services/hash";
+
+import { IHashService } from "@core/interfaces/services/hash";
 
 export class HashService implements IHashService {
   async compare(props: TCompareProps): Promise<boolean> {

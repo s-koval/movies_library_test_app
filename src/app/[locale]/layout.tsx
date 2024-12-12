@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 
 import i18nConfig from "@core/configs/i18n";
+import { TDefaultPageProps } from "@core/types";
 
 import QueryProvider from "@core/providers/QueryProvider";
 import ThemeProvider from "@core/providers/ThemeProvider";
@@ -12,10 +13,11 @@ const monserrat = Montserrat({
   subsets: ["latin"],
 });
 
-type TRootLayoutProps = Readonly<{
-  children: React.ReactNode;
-  params: Promise<{ locale: string }>;
-}>;
+type TRootLayoutProps = Readonly<
+  {
+    children: React.ReactNode;
+  } & TDefaultPageProps
+>;
 
 export const metadata: Metadata = {
   title: "Create Next App",

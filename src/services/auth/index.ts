@@ -1,18 +1,22 @@
-import { IAuthService } from "@core/interfaces/services/auth";
+import { InvalidEmailOrPasswordError } from "@core/exceptions/auth";
+
+import {
+  ACCESS_TOKEN_DEFAULT_EXPIRY,
+  REFRESH_TOKEN_DEFAULT_EXPIRY,
+} from "@core/constants/services/auth";
+
 import {
   TGenerateTokensReturnType,
   TLoginProps,
   TLoginReturnType,
 } from "@core/types/services/auth";
-import { UserService } from "../user";
-import { InvalidEmailOrPasswordError } from "@core/exceptions/auth";
-import { JwtService } from "../jwt";
-import {
-  ACCESS_TOKEN_DEFAULT_EXPIRY,
-  REFRESH_TOKEN_DEFAULT_EXPIRY,
-} from "@core/constants/services/auth";
-import { HashService } from "../hash";
 import { TUserJwtPayload } from "@core/types/services/user";
+
+import { IAuthService } from "@core/interfaces/services/auth";
+
+import { HashService } from "../hash";
+import { JwtService } from "../jwt";
+import { UserService } from "../user";
 
 export class AuthService implements IAuthService {
   private readonly userService = new UserService();

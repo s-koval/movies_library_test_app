@@ -1,12 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 
 import loginSchema from "@core/validation/auth/loginSchema";
+
 import { AuthService } from "@core/services/auth";
+
+import { errorMiddleware } from "@core/middlewares/error";
+
 import {
   ACCESS_TOKEN_DEFAULT_EXPIRY,
   REFRESH_TOKEN_DEFAULT_EXPIRY,
 } from "@core/constants/services/auth";
-import { errorMiddleware } from "@core/middlewares/error";
 
 const IS_PRODUCTION = process.env.NODE_ENV === "production";
 

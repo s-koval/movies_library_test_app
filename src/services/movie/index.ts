@@ -1,11 +1,14 @@
-import { IMovieService } from "@core/interfaces/services/movie";
 import {
   TMovie,
+  TMovieCountProps,
   TMovieCreateProps,
   TMovieFindByProps,
   TMovieFindManyProps,
   TMovieUpdateProps,
 } from "@core/types/services/movie";
+
+import { IMovieService } from "@core/interfaces/services/movie";
+
 import prismaClient from "../db";
 
 export class MovieService implements IMovieService {
@@ -23,5 +26,9 @@ export class MovieService implements IMovieService {
 
   async update(props: TMovieUpdateProps): Promise<void> {
     await prismaClient.movie.update(props);
+  }
+
+  async count(props: TMovieCountProps): Promise<number> {
+    return await prismaClient.movie.count(props);
   }
 }
