@@ -15,7 +15,7 @@ import HelperText from "@core/components/HelperText";
 import Input from "@core/components/Input";
 import Typography from "@core/components/Typography";
 
-import { useLoginMutation } from "@core/api/hooks/auth/useLoginMutation";
+import { useLoginMutation } from "@core/services/api/hooks/auth/useLoginMutation";
 
 import { TLoginForm } from "@core/types/forms/auth";
 

@@ -1,8 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
 
-import loginMutation from "@core/api/handlers/auth/loginMutation";
+import loginMutation from "@core/services/api/handlers/auth/loginMutation";
 
-import { TApiOptions } from "@core/types/api";
+import { TApiOptions } from "@core/types/services/api";
 
 const MUTATION_KEY = "useLoginMutation";
 

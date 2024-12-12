@@ -5,7 +5,6 @@ import { NextRequest, NextResponse } from "next/server";
 
 import i18nConfig from "@core/configs/i18n";
 
-
 export const middleware = async (req: NextRequest) => {
   const isMissingLocale = i18nConfig.locales.every(
     (locale) =>

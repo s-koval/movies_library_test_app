@@ -1,13 +1,17 @@
-import * as bcrypt from "bcrypt";
-import * as jwt from "jose";
 import * as yup from "yup";
 
 import { NextRequest, NextResponse } from "next/server";
 
-import prismaClient from "@core/db";
 import loginSchema from "@core/validation/auth/loginSchema";
+import { AuthService } from "@core/services/auth";
+import {
+  ACCESS_TOKEN_DEFAULT_EXPIRY,
+  REFRESH_TOKEN_DEFAULT_EXPIRY,
+} from "@core/constants/services/auth";
 
 const IS_PRODUCTION = process.env.NODE_ENV === "production";
+
+const authService = new AuthService();
 
 export async function POST(req: NextRequest) {
   try {
@@ -17,58 +21,14 @@ export async function POST(req: NextRequest) {
       stripUnknown: true,
     });
 
-    const user = await prismaClient.user.findFirst({
-      where: {
-        email: dto.email,
-      },
-      select: {
-        password: true,
-      },
-    });
+    const { accessToken, refreshToken } = await authService.login(dto);
 
-    if (!user) {
-      return NextResponse.json(
-        { message: "Invalid email or password", status: 401 },
-        { status: 401 }
-      );
-    }
-
-    const isValidPassword = await bcrypt.compare(dto.password, user.password);
-
-    if (!isValidPassword) {
-      return NextResponse.json(
-        { message: "Invalid email or password", status: 401 },
-        { status: 401 }
-      );
-    }
-
-    const secret = new TextEncoder().encode(process.env.JWT_SECRET);
-
-    if (!secret) {
-      return NextResponse.json(
-        { message: "Something went wrong", status: 500 },
-        { status: 500 }
-      );
-    }
-
-    const refreshExpiry = dto.rememberMe ? 60 * 60 * 24 * 7 : 60 * 60 * 24;
-    const accessExpiry = 60 * 15;
-
-    const accessToken = await new jwt.SignJWT({ email: dto.email })
-      .setProtectedHeader({ alg: "HS256" })
-      .setIssuedAt()
-      .setExpirationTime(Math.floor(Date.now() / 1000) + accessExpiry)
-      .sign(secret);
-    const refreshToken = await new jwt.SignJWT({ email: dto.email })
-      .setProtectedHeader({ alg: "HS256" })
-      .setIssuedAt()
-      .setExpirationTime(Math.floor(Date.now() / 1000) + refreshExpiry)
-      .sign(secret);
-
-    const response = NextResponse.json({ status: 200 }, { status: 200 });
+    const response = NextResponse.json({}, { status: 200 });
 
     response.cookies.set("refreshToken", refreshToken, {
-      maxAge: refreshExpiry,
+      maxAge: dto.rememberMe
+        ? REFRESH_TOKEN_DEFAULT_EXPIRY * 7
+        : REFRESH_TOKEN_DEFAULT_EXPIRY,
       httpOnly: true,
       secure: IS_PRODUCTION,
       sameSite: "strict",
@@ -76,7 +36,7 @@ export async function POST(req: NextRequest) {
     });
 
     response.cookies.set("accessToken", accessToken, {
-      maxAge: accessExpiry,
+      maxAge: ACCESS_TOKEN_DEFAULT_EXPIRY,
       httpOnly: true,
       secure: IS_PRODUCTION,
       sameSite: "strict",
@@ -89,13 +49,13 @@ export async function POST(req: NextRequest) {
 
     if (err instanceof yup.ValidationError) {
       return NextResponse.json(
-        { message: err.errors.join(", "), status: 400 },
-        { status: 400 }
+        { message: err.errors.join(", ") },
+        { status: 422 }
       );
     }
 
     return NextResponse.json(
-      { message: "Something went wrong", status: 500 },
+      { message: "Something went wrong" },
       { status: 500 }
     );
   }

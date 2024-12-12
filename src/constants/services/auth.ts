@@ -1,0 +1,2 @@
+export const REFRESH_TOKEN_DEFAULT_EXPIRY = 60 * 60 * 24;
+export const ACCESS_TOKEN_DEFAULT_EXPIRY = 60 * 15;
