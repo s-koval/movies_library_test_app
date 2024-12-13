@@ -1,3 +1,13 @@
 {
-  "title": "Login FR"
+  "title": "Se connecter",
+  "email": {
+    "label": "Email"
+  },
+  "password": {
+    "label": "Mot de passe"
+  },
+  "rememberMe": {
+    "label": "Souviens-toi de moi"
+  },
+  "loginBtn": "Se connecter"
 }

@@ -18,6 +18,11 @@ const Button = styled(RootButton)(
   &.next-btn {
     margin-left: 8px;
   }
+
+  &.next-btn,
+  &.prev-btn {
+    width: auto;
+  }
 `
 );
 

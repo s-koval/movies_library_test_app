@@ -82,7 +82,7 @@ const CreateMovieForm: FC = () => {
       <Styled.FieldsWrapper>
         <Styled.Form.Row>
           <Input
-            label="Title"
+            label={t("email.label")}
             onChange={onChange("title")}
             value={watch("title")}
           />
@@ -90,7 +90,7 @@ const CreateMovieForm: FC = () => {
         </Styled.Form.Row>
         <Styled.Form.Row>
           <Styled.Form.PublishYearInput
-            label="Publish year"
+            label={t("publishYear.label")}
             onChange={onChange("publishYear")}
             value={watch("publishYear")}
           />
@@ -105,9 +105,9 @@ const CreateMovieForm: FC = () => {
           type="button"
           onClick={onCancel}
         >
-          Cancel
+          {t("actions.cancel")}
         </Button>
-        <Button>Submit</Button>
+        <Button>{t("actions.submit")}</Button>
       </Styled.Form.Actions>
     </Styled.Form>
   );

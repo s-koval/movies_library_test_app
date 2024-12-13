@@ -1,5 +1,5 @@
 {
-  "title": "Login",
+  "title": "Sign in",
   "email": {
     "label": "Email"
   },
@@ -8,5 +8,6 @@
   },
   "rememberMe": {
     "label": "Remember me"
-  }
+  },
+  "loginBtn": "Login"
 }

@@ -7,6 +7,10 @@ type TPaginationProps = {
   perPage: number;
   page: number;
   onChange: (pageIdx: number) => void;
+  labels: {
+    next: string;
+    prev: string;
+  };
 };
 
 const Pagination: FC<TPaginationProps> = ({
@@ -14,6 +18,7 @@ const Pagination: FC<TPaginationProps> = ({
   total,
   page,
   onChange,
+  labels,
 }) => {
   const pages = Math.ceil(total / perPage);
 
@@ -31,7 +36,7 @@ const Pagination: FC<TPaginationProps> = ({
           onClick={() => onChange(page - 1)}
           className="prev-btn"
         >
-          Prev
+          {labels.prev}
         </Styled.Pagination.Button>
       )}
       {Array.from({ length: pages }).map((_, idx) => (
@@ -51,7 +56,7 @@ const Pagination: FC<TPaginationProps> = ({
           onClick={() => onChange(page + 1)}
           className="next-btn"
         >
-          Next
+          {labels.next}
         </Styled.Pagination.Button>
       )}
     </Styled.Pagination>

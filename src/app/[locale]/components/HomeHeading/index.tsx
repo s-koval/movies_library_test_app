@@ -16,7 +16,6 @@ import { useLogoutMutation } from "@core/services/api/hooks/mutations/auth/useLo
 
 import Styled from "./styled";
 
-
 const HomeHeading: FC = () => {
   const { t } = useTranslation("movies");
 
@@ -46,12 +45,12 @@ const HomeHeading: FC = () => {
         >
           {t("title")}
         </Typography>
-        <Link href="/create" variant="text">
+        <Link href={`/${params.locale}/create`} variant="text">
           <AddIcon size={isTable ? 24 : 32} />
         </Link>
       </Styled.TitleWrapper>
       <Styled.LogoutButton onClick={onLogout}>
-        {!isTable && "Logout"}
+        {!isTable && t("actions.logout")}
         <LogoutIcon size={isTable ? 24 : 32} />
       </Styled.LogoutButton>
     </Styled.Wrapper>

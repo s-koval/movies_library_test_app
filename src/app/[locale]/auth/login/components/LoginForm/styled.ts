@@ -18,6 +18,8 @@ const Form = styled.form`
 
   & > ${StyledTypography.Typography} {
     margin-bottom: 40px;
+
+    text-align: center;
   }
 
   ${StyledButton.Button} {

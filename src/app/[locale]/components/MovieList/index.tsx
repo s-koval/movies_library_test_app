@@ -1,6 +1,7 @@
 "use client";
 
 import { FC, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 
@@ -22,6 +23,8 @@ const MovieList: FC = () => {
   const search = useSearchParams();
   const params = useParams();
   const router = useRouter();
+
+  const { t } = useTranslation("movies");
 
   const page = parseInt(search.get("page") || `${DEFAULT_MOVIES_PAGE}`);
 
@@ -65,6 +68,10 @@ const MovieList: FC = () => {
           total={data.total}
           perPage={DEFAULT_MOVIES_TAKE}
           onChange={onPageChange}
+          labels={{
+            next: t("actions.next"),
+            prev: t("actions.prev"),
+          }}
         />
       )}
     </>

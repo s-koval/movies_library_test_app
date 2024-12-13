@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 import loginSchema from "@core/validation/auth/loginSchema";
 
@@ -25,6 +25,7 @@ const LoginForm: FC = () => {
   const { t } = useTranslation("login");
 
   const router = useRouter();
+  const params = useParams();
 
   const {
     watch,
@@ -46,7 +47,7 @@ const LoginForm: FC = () => {
       console.log(err);
     },
     onSuccess: () => {
-      router.push("/");
+      router.push(`/${params.locale}`);
     },
   });
 

@@ -20,7 +20,7 @@ type TEditMovieContent = {
 const EditContent: FC<TEditMovieContent> = ({ id }) => {
   const isTable = useMediaQuery("(max-width: 768px)");
 
-  const { t } = useTranslation();
+  const { t } = useTranslation("edit");
 
   const { data } = useFetchMovieQuery(id);
 
