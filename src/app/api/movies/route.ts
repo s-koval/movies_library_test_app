@@ -8,12 +8,22 @@ import { MovieService } from "@core/services/movie";
 
 import { errorMiddleware } from "@core/middlewares/error";
 
+import {
+  DEFAULT_MOVIES_PAGE,
+  DEFAULT_MOVIES_TAKE,
+} from "@core/constants/api/movies";
+
 import { TAuthRequest } from "@core/types/api";
 
 const movieService = new MovieService();
 const fileService = new FileService();
 
 const GET = async (req: TAuthRequest) => {
+  const params = req.nextUrl.searchParams;
+
+  const page = parseInt(params.get("page") || `${DEFAULT_MOVIES_PAGE}`);
+  const take = parseInt(params.get("take") || `${DEFAULT_MOVIES_TAKE}`);
+
   const where = {
     userId: req.user.id,
   };
@@ -21,6 +31,11 @@ const GET = async (req: TAuthRequest) => {
   const [movies, total] = await Promise.all([
     movieService.findMany({
       where,
+      take,
+      skip: page * take,
+      orderBy: {
+        publishYear: "desc",
+      },
     }),
     movieService.count({ where }),
   ]);

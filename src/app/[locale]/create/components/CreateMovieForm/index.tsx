@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useParams, useRouter } from "next/navigation";
 
 import createMovieSchema from "@core/validation/movies/create";
 
@@ -22,11 +23,16 @@ import Styled from "./styled";
 const CreateMovieForm: FC = () => {
   const { t } = useTranslation("create");
 
+  const params = useParams();
+
+  const router = useRouter();
+
   const {
     setValue,
     watch,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm<TCreateMovieForm>({
     defaultValues: {
       title: "",
@@ -39,6 +45,9 @@ const CreateMovieForm: FC = () => {
   const { mutate } = useCreateMovieMutation({
     onSuccess: () => {
       console.log("Success");
+
+      reset();
+      router.push(`/${params.locale}`);
     },
     onError: (err) => {
       console.log(err);
@@ -57,6 +66,10 @@ const CreateMovieForm: FC = () => {
 
   const onSubmit = (data: TCreateMovieForm) => {
     mutate(data);
+  };
+
+  const onCancel = () => {
+    router.push(`/${params.locale}`);
   };
 
   return (
@@ -85,7 +98,13 @@ const CreateMovieForm: FC = () => {
           <HelperText value={errors?.publishYear?.message} color="error" />
         </Styled.Form.Row>
         <Styled.Form.Actions>
-          <Button variant="outlined" color="neutral" brightness={0}>
+          <Button
+            variant="outlined"
+            color="neutral"
+            brightness={0}
+            type="button"
+            onClick={onCancel}
+          >
             Cancel
           </Button>
           <Button>Submit</Button>

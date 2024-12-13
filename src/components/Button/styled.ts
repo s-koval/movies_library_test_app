@@ -5,7 +5,6 @@ import { TBasicNumberKeys } from "@core/types/theme";
 
 import { getBasicStyles } from "./utils";
 
-
 const Button = styled.button<TStyledButtonProps>((props) => {
   const basicStyles = getBasicStyles({
     borderRadius: props.theme.borderRadius.lg,

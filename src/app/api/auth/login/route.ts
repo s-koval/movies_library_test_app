@@ -1,4 +1,3 @@
-import { IS_PRODUCTION } from "@core/constants";
 import { NextRequest, NextResponse } from "next/server";
 
 import loginSchema from "@core/validation/auth/loginSchema";
@@ -11,7 +10,6 @@ import {
   ACCESS_TOKEN_DEFAULT_EXPIRY,
   REFRESH_TOKEN_DEFAULT_EXPIRY,
 } from "@core/constants/services/auth";
-
 
 const authService = new AuthService();
 
@@ -31,7 +29,7 @@ const POST = async (req: NextRequest) => {
       ? REFRESH_TOKEN_DEFAULT_EXPIRY * 7
       : REFRESH_TOKEN_DEFAULT_EXPIRY,
     httpOnly: true,
-    secure: IS_PRODUCTION,
+    secure: true,
     sameSite: "strict",
     path: "/",
   });
@@ -39,7 +37,7 @@ const POST = async (req: NextRequest) => {
   response.cookies.set("accessToken", accessToken, {
     maxAge: ACCESS_TOKEN_DEFAULT_EXPIRY,
     httpOnly: true,
-    secure: IS_PRODUCTION,
+    secure: true,
     sameSite: "strict",
     path: "/",
   });

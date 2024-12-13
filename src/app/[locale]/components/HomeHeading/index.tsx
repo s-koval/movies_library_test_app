@@ -3,7 +3,7 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 import AddIcon from "@core/icons/Add";
 import LogoutIcon from "@core/icons/Logout";
@@ -20,9 +20,11 @@ const HomeHeading: FC = () => {
 
   const router = useRouter();
 
+  const params = useParams();
+
   const { mutate } = useLogoutMutation({
     onSuccess: () => {
-      router.push("/auth/login");
+      router.push(`/${params.locale}/auth/login`);
     },
   });
 
