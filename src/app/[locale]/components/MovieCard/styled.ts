@@ -23,6 +23,8 @@ const Image = styled.img(
   width: 100%;
   max-height: 400px;
 
+  aspect-ratio: 1 / 1.37;
+
   object-fit: cover;
   object-position: center;
 

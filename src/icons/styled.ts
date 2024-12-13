@@ -11,10 +11,14 @@ type TStyledSVGProps = {
 const SVG = styled.svg<TStyledSVGProps>((props) => {
   let styles = "";
 
+  const brightness = props.color === "neutral" ? 0 : 400;
+
   if (props.$hasFill) {
     styles += `
         fill: ${
-          props.color ? props.theme.colors[props.color][400] : "currentColor"
+          props.color
+            ? props.theme.colors[props.color][brightness]
+            : "currentColor"
         };
     `;
   }
@@ -22,7 +26,9 @@ const SVG = styled.svg<TStyledSVGProps>((props) => {
   if (props.$hasStroke) {
     styles += `
         stroke: ${
-          props.color ? props.theme.colors[props.color][400] : "currentColor"
+          props.color
+            ? props.theme.colors[props.color][brightness]
+            : "currentColor"
         };
     `;
   }

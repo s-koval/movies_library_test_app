@@ -3,6 +3,7 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 
+import { useMediaQuery } from "@uidotdev/usehooks";
 import { useParams, useRouter } from "next/navigation";
 
 import AddIcon from "@core/icons/Add";
@@ -15,8 +16,11 @@ import { useLogoutMutation } from "@core/services/api/hooks/mutations/auth/useLo
 
 import Styled from "./styled";
 
+
 const HomeHeading: FC = () => {
   const { t } = useTranslation("movies");
+
+  const isTable = useMediaQuery("(max-width: 768px)");
 
   const router = useRouter();
 
@@ -35,16 +39,20 @@ const HomeHeading: FC = () => {
   return (
     <Styled.Wrapper>
       <Styled.TitleWrapper>
-        <Typography component="h2" variant="h2" brightness={0}>
+        <Typography
+          component="h2"
+          variant={isTable ? "h3" : "h2"}
+          brightness={0}
+        >
           {t("title")}
         </Typography>
         <Link href="/create" variant="text">
-          <AddIcon size={32} />
+          <AddIcon size={isTable ? 24 : 32} />
         </Link>
       </Styled.TitleWrapper>
       <Styled.LogoutButton onClick={onLogout}>
-        Logout
-        <LogoutIcon size={32} />
+        {!isTable && "Logout"}
+        <LogoutIcon size={isTable ? 24 : 32} />
       </Styled.LogoutButton>
     </Styled.Wrapper>
   );

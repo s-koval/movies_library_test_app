@@ -2,6 +2,10 @@ import theme from "@core/theme";
 
 const getBasicStyles = () => {
   return `
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
     text-decoration: none;
   
     cursor: pointer;

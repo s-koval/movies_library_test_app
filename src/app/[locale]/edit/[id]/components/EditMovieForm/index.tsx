@@ -96,13 +96,13 @@ const EditMovieForm: FC<TEditMovieFormProps> = ({ movie }) => {
 
   return (
     <Styled.Form onSubmit={handleSubmit(onSubmit)}>
-      <Styled.LeftSide>
+      <Styled.FilePickerWrapper>
         <Styled.Form.Row>
           <FilePicker label={t("filePicker.label")} onSelect={onSelect} />
           <HelperText value={errors?.image?.message} color="error" />
         </Styled.Form.Row>
-      </Styled.LeftSide>
-      <Styled.RightSide>
+      </Styled.FilePickerWrapper>
+      <Styled.FieldsWrapper>
         <Styled.Form.Row>
           <Input
             label="Title"
@@ -112,26 +112,26 @@ const EditMovieForm: FC<TEditMovieFormProps> = ({ movie }) => {
           <HelperText value={errors?.title?.message} color="error" />
         </Styled.Form.Row>
         <Styled.Form.Row>
-          <Input
+          <Styled.Form.PublishYearInput
             label="Publish year"
             onChange={onChange("publishYear")}
             value={watch("publishYear")}
           />
           <HelperText value={errors?.publishYear?.message} color="error" />
         </Styled.Form.Row>
-        <Styled.Form.Actions>
-          <Button
-            variant="outlined"
-            color="neutral"
-            brightness={0}
-            type="button"
-            onClick={onCancel}
-          >
-            Cancel
-          </Button>
-          <Button>Submit</Button>
-        </Styled.Form.Actions>
-      </Styled.RightSide>
+      </Styled.FieldsWrapper>
+      <Styled.Form.Actions>
+        <Button
+          variant="outlined"
+          color="neutral"
+          brightness={0}
+          type="button"
+          onClick={onCancel}
+        >
+          Cancel
+        </Button>
+        <Button>Submit</Button>
+      </Styled.Form.Actions>
     </Styled.Form>
   );
 };
