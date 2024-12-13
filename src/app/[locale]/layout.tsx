@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 
 import i18nConfig from "@core/configs/i18n";
+import DefaultLayout from "@core/layouts/DefaultLayout";
 import { TDefaultPageProps } from "@core/types";
 
 import QueryProvider from "@core/providers/QueryProvider";
@@ -35,7 +36,9 @@ const RootLayout = async ({ children, params }: TRootLayoutProps) => {
     <html lang={locale} dir={dir(locale)}>
       <body className={monserrat.className}>
         <QueryProvider>
-          <ThemeProvider>{children}</ThemeProvider>
+          <ThemeProvider>
+            <DefaultLayout>{children}</DefaultLayout>
+          </ThemeProvider>
         </QueryProvider>
       </body>
     </html>

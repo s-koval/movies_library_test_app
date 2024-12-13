@@ -6,10 +6,10 @@ const Wrapper = styled.div(
   align-items: center;
   justify-content: space-between;
 
-  margin-block: ${props.theme.spacing["6xl"]};
+  padding-block: ${props.theme.spacing["6xl"]};
 
   @media screen and (max-width: 546px) {
-    margin-block: ${props.theme.spacing["5xl"]};
+    padding-block: ${props.theme.spacing["5xl"]};
   }
 `
 );
