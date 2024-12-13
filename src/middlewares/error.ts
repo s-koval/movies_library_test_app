@@ -1,7 +1,9 @@
 import { ValidationError } from "yup";
 
+import { JWTExpired } from "jose/errors";
 import { NextResponse } from "next/server";
 
+import { UnauthorizedError } from "@core/exceptions/auth";
 import { JwtNotFound } from "@core/exceptions/jwt";
 
 import { InvalidEmailOrPasswordError } from "../exceptions/auth/invalid-email-or-password";
@@ -27,7 +29,11 @@ export const errorMiddleware = (handler: TNextHandler) => {
         status = 403;
       }
 
-      if (err instanceof JwtNotFound) {
+      if (
+        err instanceof JwtNotFound ||
+        err instanceof UnauthorizedError ||
+        err instanceof JWTExpired
+      ) {
         message = "Unauthorized";
         status = 401;
       }

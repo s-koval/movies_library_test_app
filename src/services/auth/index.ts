@@ -1,4 +1,7 @@
-import { InvalidEmailOrPasswordError } from "@core/exceptions/auth";
+import {
+  InvalidEmailOrPasswordError,
+  UnauthorizedError,
+} from "@core/exceptions/auth";
 
 import {
   ACCESS_TOKEN_DEFAULT_EXPIRY,
@@ -9,6 +12,7 @@ import {
   TGenerateTokensReturnType,
   TLoginProps,
   TLoginReturnType,
+  TRefreshTokensReturnType,
 } from "@core/types/services/auth";
 import { TUserJwtPayload } from "@core/types/services/user";
 
@@ -53,6 +57,21 @@ export class AuthService implements IAuthService {
         ? REFRESH_TOKEN_DEFAULT_EXPIRY * 7
         : REFRESH_TOKEN_DEFAULT_EXPIRY
     );
+  }
+
+  async refreshTokens(token: string): Promise<TRefreshTokensReturnType> {
+    const { payload } = await this.jwtService.verify<TUserJwtPayload>(token);
+
+    const user = await this.userService.findBy({
+      where: { id: payload.id },
+      select: null,
+    });
+
+    if (!user) {
+      throw new UnauthorizedError();
+    }
+
+    return await this.generateTokens({ id: payload.id });
   }
 
   async generateTokens(

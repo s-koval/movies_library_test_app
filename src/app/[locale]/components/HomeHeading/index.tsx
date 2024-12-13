@@ -3,16 +3,32 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 
+import { useRouter } from "next/navigation";
+
 import AddIcon from "@core/icons/Add";
 import LogoutIcon from "@core/icons/Logout";
 
 import Link from "@core/components/Link";
 import Typography from "@core/components/Typography";
 
+import { useLogoutMutation } from "@core/services/api/hooks/mutations/auth/useLogoutMutation";
+
 import Styled from "./styled";
 
 const HomeHeading: FC = () => {
   const { t } = useTranslation("movies");
+
+  const router = useRouter();
+
+  const { mutate } = useLogoutMutation({
+    onSuccess: () => {
+      router.push("/auth/login");
+    },
+  });
+
+  const onLogout = () => {
+    mutate();
+  };
 
   return (
     <Styled.Wrapper>
@@ -24,7 +40,7 @@ const HomeHeading: FC = () => {
           <AddIcon size={32} />
         </Link>
       </Styled.TitleWrapper>
-      <Styled.LogoutButton>
+      <Styled.LogoutButton onClick={onLogout}>
         Logout
         <LogoutIcon size={32} />
       </Styled.LogoutButton>

@@ -10,8 +10,6 @@ import { errorMiddleware } from "@core/middlewares/error";
 
 import { TAuthRequest } from "@core/types/api";
 
-
-
 const movieService = new MovieService();
 const fileService = new FileService();
 
@@ -34,8 +32,6 @@ const POST = async (req: TAuthRequest) => {
   const formData = await req.formData();
 
   const parsed = Object.fromEntries(formData.entries());
-
-  console.log(parsed);
 
   const dto = await createMovieSchema.validate(parsed);
 

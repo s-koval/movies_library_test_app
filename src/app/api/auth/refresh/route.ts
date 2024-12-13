@@ -1,7 +1,6 @@
-import { IS_PRODUCTION } from "@core/constants";
 import { NextRequest, NextResponse } from "next/server";
 
-import loginSchema from "@core/validation/auth/loginSchema";
+import { UnauthorizedError } from "@core/exceptions/auth";
 
 import { AuthService } from "@core/services/auth";
 
@@ -12,36 +11,33 @@ import {
   REFRESH_TOKEN_DEFAULT_EXPIRY,
 } from "@core/constants/services/auth";
 
-
 const authService = new AuthService();
 
 const POST = async (req: NextRequest) => {
-  const body = await req.json();
+  const token = req.cookies.get("refreshToken");
 
-  const dto = await loginSchema.validate(body, {
-    stripUnknown: true,
-  });
+  if (!token) {
+    throw new UnauthorizedError();
+  }
 
-  const { accessToken, refreshToken } = await authService.login(dto);
+  const { accessToken, refreshToken } = await authService.refreshTokens(
+    token.value
+  );
 
   const response = NextResponse.json({}, { status: 200 });
 
   response.cookies.set("refreshToken", refreshToken, {
-    maxAge: dto.rememberMe
-      ? REFRESH_TOKEN_DEFAULT_EXPIRY * 7
-      : REFRESH_TOKEN_DEFAULT_EXPIRY,
+    maxAge: REFRESH_TOKEN_DEFAULT_EXPIRY,
     httpOnly: true,
-    secure: IS_PRODUCTION,
+    secure: true,
     sameSite: "strict",
-    path: "/",
   });
 
   response.cookies.set("accessToken", accessToken, {
     maxAge: ACCESS_TOKEN_DEFAULT_EXPIRY,
     httpOnly: true,
-    secure: IS_PRODUCTION,
+    secure: true,
     sameSite: "strict",
-    path: "/",
   });
 
   return response;

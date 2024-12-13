@@ -6,7 +6,7 @@ import { TDefaultPageProps } from "@core/types";
 import fetchMoviesQuery from "@core/services/api/handlers/queries/movies/fetchMoviesQuery";
 import { QUERY_KEY as FETCH_MOVIES_QUERY_KEY } from "@core/services/api/hooks/queries/movies/useFetchMoviesQuery";
 
-import { queryClient } from "@core/providers/QueryProvider/config";
+import { queryClient } from "@core/providers/QueryProvider/client";
 import TranslationsProvider from "@core/providers/TranslationProvider";
 
 import initTranslations from "../i18n";

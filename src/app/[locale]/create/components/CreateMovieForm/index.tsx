@@ -59,8 +59,6 @@ const CreateMovieForm: FC = () => {
     mutate(data);
   };
 
-  console.log(errors);
-
   return (
     <Styled.Form onSubmit={handleSubmit(onSubmit)}>
       <Styled.LeftSide>

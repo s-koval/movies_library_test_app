@@ -1,9 +1,13 @@
-import * as jwt from "jose";
 import { i18nRouter } from "next-i18n-router";
 
 import { NextRequest, NextResponse } from "next/server";
 
 import i18nConfig from "@core/configs/i18n";
+
+import refreshTokensMutation from "./services/api/handlers/mutations/auth/refreshTokensMutation";
+import { JwtService } from "./services/jwt";
+
+const jwtService = new JwtService();
 
 export const middleware = async (req: NextRequest) => {
   const isMissingLocale = i18nConfig.locales.every(
@@ -31,24 +35,31 @@ export const middleware = async (req: NextRequest) => {
       return NextResponse.next();
     }
   }
-
   try {
     if (!accessToken) {
       return NextResponse.redirect(
         new URL(`/${locale}/auth/login`, req.nextUrl)
       );
     } else {
-      await jwt.jwtVerify(
-        accessToken.value,
-        new TextEncoder().encode(process.env.JWT_SECRET || "")
-      );
+      await jwtService.verify(accessToken.value);
 
       return NextResponse.next();
     }
-  } catch (err) {
-    console.log(err, "<<< err");
+  } catch {
+    try {
+      await refreshTokensMutation(req.cookies.toString());
 
-    return NextResponse.redirect(new URL(`/${locale}/auth/login`, req.nextUrl));
+      return NextResponse.next();
+    } catch {
+      const response = NextResponse.redirect(
+        new URL(`/${locale}/auth/login`, req.nextUrl)
+      );
+
+      response.cookies.delete("accessToken");
+      response.cookies.delete("refreshToken");
+
+      return response;
+    }
   }
 };
 

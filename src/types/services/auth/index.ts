@@ -10,3 +10,5 @@ export type TGenerateTokensReturnType = {
 };
 
 export type TLoginReturnType = TGenerateTokensReturnType;
+
+export type TRefreshTokensReturnType = TGenerateTokensReturnType;

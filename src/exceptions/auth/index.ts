@@ -1,2 +1,4 @@
 import { InvalidEmailOrPasswordError } from "./invalid-email-or-password";
-export { InvalidEmailOrPasswordError };
+import { UnauthorizedError } from "./unauthorized";
+
+export { InvalidEmailOrPasswordError, UnauthorizedError };
