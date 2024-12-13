@@ -1,6 +1,6 @@
 "use client";
 
-import { FC } from "react";
+import { FC, useCallback } from "react";
 
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 
@@ -17,7 +17,6 @@ import MovieCard from "../MovieCard";
 import MovieListEmpty from "../MovieListEmpty";
 
 import Styled from "./styled";
-
 
 const MovieList: FC = () => {
   const search = useSearchParams();
@@ -38,6 +37,13 @@ const MovieList: FC = () => {
     router.push(`/${params.locale}?page=${pageIdx}`);
   };
 
+  const onMovieClick = useCallback(
+    (id: string) => {
+      router.push(`/${params.locale}/edit/${id}`);
+    },
+    [params, router]
+  );
+
   if (isLoading) {
     return <div>Loading</div>;
   }
@@ -50,7 +56,7 @@ const MovieList: FC = () => {
     <>
       <Styled.Wrapper>
         {data.movies?.map((m) => (
-          <MovieCard movie={m} key={m.id} />
+          <MovieCard movie={m} key={m.id} onClick={onMovieClick} />
         ))}
       </Styled.Wrapper>
       {!!data && (

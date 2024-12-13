@@ -1,4 +1,5 @@
 import { TCreateMovieForm } from "@core/types/forms/movies/create";
+import { TEditMovieForm } from "@core/types/forms/movies/edit";
 
 import { TMovie } from "../movie";
 
@@ -13,4 +14,8 @@ export type TFetchMoviesQueryResponse = {
   total: number;
 };
 
+export type TFetchMovieQueryResponse = TMovie;
+
 export type TCreateMovieData = TCreateMovieForm;
+
+export type TUpdateMovieData = TEditMovieForm;

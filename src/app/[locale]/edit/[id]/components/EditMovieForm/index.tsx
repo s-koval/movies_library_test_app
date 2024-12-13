@@ -1,47 +1,50 @@
-"use client";
-
-import { ChangeEvent, FC } from "react";
+import { ChangeEvent, FC, useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useParams, useRouter } from "next/navigation";
 
-import createMovieSchema from "@core/validation/movies/create";
+import editMovieSchema from "@core/validation/movies/edit";
 
 import Button from "@core/components/Button";
 import FilePicker from "@core/components/FilePicker";
 import HelperText from "@core/components/HelperText";
 import Input from "@core/components/Input";
 
-import { useCreateMovieMutation } from "@core/services/api/hooks/mutations/movies/useCreateMovieMutation";
+import { useUpdateMovieMutation } from "@core/services/api/hooks/mutations/movies/useUpdateMovieMutation";
 
-import { TCreateMovieForm } from "@core/types/forms/movies/create";
+import { TEditMovieForm } from "@core/types/forms/movies/edit";
+import { TUpdateMovieData } from "@core/types/services/api/movie";
+import { TMovie } from "@core/types/services/movie";
 
 import Styled from "./styled";
 
-const CreateMovieForm: FC = () => {
-  const { t } = useTranslation("create");
+type TEditMovieFormProps = {
+  movie: TMovie;
+};
+
+const EditMovieForm: FC<TEditMovieFormProps> = ({ movie }) => {
+  const { t } = useTranslation("edit");
 
   const params = useParams();
   const router = useRouter();
 
   const {
-    setValue,
-    watch,
-    formState: { errors },
     handleSubmit,
+    watch,
+    setValue,
+    formState: { errors },
     reset,
-  } = useForm<TCreateMovieForm>({
+  } = useForm<TEditMovieForm>({
     defaultValues: {
-      title: "",
-      publishYear: "",
+      title: movie.title,
+      publishYear: movie.publishYear + "",
     },
-    resolver: yupResolver(createMovieSchema),
-    reValidateMode: "onChange",
+    resolver: yupResolver(editMovieSchema),
   });
 
-  const { mutate } = useCreateMovieMutation({
+  const { mutate } = useUpdateMovieMutation(movie.id, {
     onSuccess: () => {
       console.log("Success");
 
@@ -57,15 +60,35 @@ const CreateMovieForm: FC = () => {
     setValue("image", file);
   };
 
-  const onChange = (field: keyof Exclude<TCreateMovieForm, "image">) => {
-    return (evt: ChangeEvent<HTMLInputElement>) => {
-      setValue(field, evt.target.value);
-    };
-  };
+  const onChange = useCallback(
+    (field: keyof Exclude<TEditMovieForm, "image">) => {
+      return (evt: ChangeEvent<HTMLInputElement>) => {
+        setValue(field, evt.target.value);
+      };
+    },
+    [setValue]
+  );
 
-  const onSubmit = (data: TCreateMovieForm) => {
-    mutate(data);
-  };
+  const onSubmit = useCallback(
+    (data: TEditMovieForm) => {
+      const transformedData: TUpdateMovieData = {};
+
+      if (data.title !== movie.title) {
+        transformedData.title = data.title;
+      }
+
+      if (data.publishYear !== movie.publishYear + "") {
+        transformedData.publishYear = data.publishYear;
+      }
+
+      if (data.image) {
+        transformedData.image = data.image;
+      }
+
+      mutate(transformedData);
+    },
+    [movie, mutate]
+  );
 
   const onCancel = () => {
     router.push(`/${params.locale}`);
@@ -113,4 +136,4 @@ const CreateMovieForm: FC = () => {
   );
 };
 
-export default CreateMovieForm;
+export default EditMovieForm;

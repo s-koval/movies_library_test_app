@@ -6,4 +6,11 @@ export type TAuthRequest = NextRequest & {
   };
 };
 
-export type TNextHandler = (req: TAuthRequest) => Promise<NextResponse>;
+export type TDynamicSegments = {
+  params: Promise<{ id: string }>;
+};
+
+export type TNextHandler = (
+  req: TAuthRequest,
+  segments: TDynamicSegments
+) => Promise<NextResponse>;

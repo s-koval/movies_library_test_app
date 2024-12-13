@@ -7,6 +7,14 @@ const Wrapper = styled.div(
     background-color: ${props.theme.colors.secondary[600]};
 
     border-radius: ${props.theme.borderRadius.lg};
+
+    cursor: pointer;
+
+    transition: background-color .2s ease;
+
+    &:hover {
+      background-color: ${props.theme.colors.secondary[400]};
+    }
 `
 );
 

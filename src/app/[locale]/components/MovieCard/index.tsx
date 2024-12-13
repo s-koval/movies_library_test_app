@@ -8,11 +8,12 @@ import Styled from "./styled";
 
 type TMovieCardProps = {
   movie: TMovie;
+  onClick: (id: string) => void;
 };
 
-const MovieCard: FC<TMovieCardProps> = ({ movie }) => {
+const MovieCard: FC<TMovieCardProps> = ({ movie, onClick }) => {
   return (
-    <Styled.Wrapper>
+    <Styled.Wrapper onClick={() => onClick(movie.id)}>
       <Styled.Image src={`/uploads/${movie.image}`} />
       <Styled.Content>
         <Typography variant="body-lg" brightness={0}>

@@ -2,13 +2,13 @@ import { JwtNotFound } from "@core/exceptions/jwt";
 
 import { JwtService } from "@core/services/jwt";
 
-import { TAuthRequest, TNextHandler } from "@core/types/api";
+import { TAuthRequest, TDynamicSegments, TNextHandler } from "@core/types/api";
 import { TUserJwtPayload } from "@core/types/services/user";
 
 const jwtService = new JwtService();
 
 const authGuard = (handler: TNextHandler) => {
-  return async (req: TAuthRequest) => {
+  return async (req: TAuthRequest, segments: TDynamicSegments) => {
     const token = req.cookies.get("accessToken");
 
     if (!token) {
@@ -21,7 +21,7 @@ const authGuard = (handler: TNextHandler) => {
       id: payload.id,
     };
 
-    return await handler(req);
+    return await handler(req, segments);
   };
 };
 
