@@ -12,7 +12,6 @@ import { errorMiddleware } from "@core/middlewares/error";
 import { TAuthRequest, TDynamicSegments } from "@core/types/api";
 import { TMovieUpdateProps } from "@core/types/services/movie";
 
-
 const movieService = new MovieService();
 const fileService = new FileService();
 
@@ -68,6 +67,8 @@ const PUT = async (req: TAuthRequest, segments: TDynamicSegments) => {
   }
 
   if (dto.image) {
+    // TBD fileService.delete
+
     const fileName = await fileService.upload(dto.image);
 
     props.data.image = fileName;

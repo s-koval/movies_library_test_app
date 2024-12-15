@@ -1,5 +1,4 @@
-import { TCreateMovieForm } from "@core/types/forms/movies/create";
-import { TEditMovieForm } from "@core/types/forms/movies/edit";
+import { TMovieForm } from "@core/types/forms/movies";
 
 import { TMovie } from "../movie";
 
@@ -16,6 +15,6 @@ export type TFetchMoviesQueryResponse = {
 
 export type TFetchMovieQueryResponse = TMovie;
 
-export type TCreateMovieData = TCreateMovieForm;
+export type TCreateMovieData = Required<TMovieForm>;
 
-export type TUpdateMovieData = TEditMovieForm;
+export type TUpdateMovieData = TMovieForm;

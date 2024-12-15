@@ -1,51 +1,23 @@
 "use client";
 
-import { ChangeEvent, FC } from "react";
-import { useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
+import { FC } from "react";
 
-import { yupResolver } from "@hookform/resolvers/yup";
 import { useParams, useRouter } from "next/navigation";
 
-import createMovieSchema from "@core/validation/movies/create";
-
-import Button from "@core/components/Button";
-import FilePicker from "@core/components/FilePicker";
-import HelperText from "@core/components/HelperText";
-import Input from "@core/components/Input";
+import MovieForm from "@core/templates/MovieForm";
 
 import { useCreateMovieMutation } from "@core/services/api/hooks/mutations/movies/useCreateMovieMutation";
 
-import { TCreateMovieForm } from "@core/types/forms/movies/create";
-
-import Styled from "./styled";
+import { TMovieForm } from "@core/types/forms/movies";
 
 const CreateMovieForm: FC = () => {
-  const { t } = useTranslation("create");
-
   const params = useParams();
   const router = useRouter();
-
-  const {
-    setValue,
-    watch,
-    formState: { errors },
-    handleSubmit,
-    reset,
-  } = useForm<TCreateMovieForm>({
-    defaultValues: {
-      title: "",
-      publishYear: "",
-    },
-    resolver: yupResolver(createMovieSchema),
-    reValidateMode: "onChange",
-  });
 
   const { mutate } = useCreateMovieMutation({
     onSuccess: () => {
       console.log("Success");
 
-      reset();
       router.push(`/${params.locale}`);
     },
     onError: (err) => {
@@ -53,64 +25,23 @@ const CreateMovieForm: FC = () => {
     },
   });
 
-  const onSelect = (file: File) => {
-    setValue("image", file);
-  };
+  const onSubmit = (data: TMovieForm) => {
+    if (!data.image || !data.publishYear || !data.title) {
+      return;
+    }
 
-  const onChange = (field: keyof Exclude<TCreateMovieForm, "image">) => {
-    return (evt: ChangeEvent<HTMLInputElement>) => {
-      setValue(field, evt.target.value);
-    };
-  };
-
-  const onSubmit = (data: TCreateMovieForm) => {
-    mutate(data);
+    mutate({
+      image: data.image,
+      publishYear: data.publishYear,
+      title: data.title,
+    });
   };
 
   const onCancel = () => {
     router.push(`/${params.locale}`);
   };
 
-  return (
-    <Styled.Form onSubmit={handleSubmit(onSubmit)}>
-      <Styled.FilePickerWrapper>
-        <Styled.Form.Row>
-          <FilePicker label={t("filePicker.label")} onSelect={onSelect} />
-          <HelperText value={errors?.image?.message} color="error" />
-        </Styled.Form.Row>
-      </Styled.FilePickerWrapper>
-      <Styled.FieldsWrapper>
-        <Styled.Form.Row>
-          <Input
-            label={t("email.label")}
-            onChange={onChange("title")}
-            value={watch("title")}
-          />
-          <HelperText value={errors?.title?.message} color="error" />
-        </Styled.Form.Row>
-        <Styled.Form.Row>
-          <Styled.Form.PublishYearInput
-            label={t("publishYear.label")}
-            onChange={onChange("publishYear")}
-            value={watch("publishYear")}
-          />
-          <HelperText value={errors?.publishYear?.message} color="error" />
-        </Styled.Form.Row>
-      </Styled.FieldsWrapper>
-      <Styled.Form.Actions>
-        <Button
-          variant="outlined"
-          color="neutral"
-          brightness={0}
-          type="button"
-          onClick={onCancel}
-        >
-          {t("actions.cancel")}
-        </Button>
-        <Button>{t("actions.submit")}</Button>
-      </Styled.Form.Actions>
-    </Styled.Form>
-  );
+  return <MovieForm onCancel={onCancel} onSubmit={onSubmit} />;
 };
 
 export default CreateMovieForm;

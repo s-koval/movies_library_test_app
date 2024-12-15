@@ -6,7 +6,7 @@ import Styled from "./styled";
 
 type TFilePickerProps = {
   label: string;
-  onSelect: (evt: File) => void;
+  onSelect: (file: File) => void;
 };
 
 const FilePicker: FC<TFilePickerProps> = ({ label, onSelect }) => {

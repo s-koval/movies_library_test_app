@@ -50,7 +50,9 @@ export const middleware = async (req: NextRequest) => {
       await refreshTokensMutation(req.cookies.toString());
 
       return NextResponse.next();
-    } catch {
+    } catch (err) {
+      console.log(err);
+
       const response = NextResponse.redirect(
         new URL(`/${locale}/auth/login`, req.nextUrl)
       );

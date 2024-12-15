@@ -1,16 +1,8 @@
-import { ChangeEvent, FC, useCallback } from "react";
-import { useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
+import { FC, useCallback } from "react";
 
-import { yupResolver } from "@hookform/resolvers/yup";
 import { useParams, useRouter } from "next/navigation";
 
-import editMovieSchema from "@core/validation/movies/edit";
-
-import Button from "@core/components/Button";
-import FilePicker from "@core/components/FilePicker";
-import HelperText from "@core/components/HelperText";
-import Input from "@core/components/Input";
+import MovieForm from "@core/templates/MovieForm";
 
 import { useUpdateMovieMutation } from "@core/services/api/hooks/mutations/movies/useUpdateMovieMutation";
 
@@ -18,56 +10,25 @@ import { TEditMovieForm } from "@core/types/forms/movies/edit";
 import { TUpdateMovieData } from "@core/types/services/api/movie";
 import { TMovie } from "@core/types/services/movie";
 
-import Styled from "./styled";
 
 type TEditMovieFormProps = {
   movie: TMovie;
 };
 
 const EditMovieForm: FC<TEditMovieFormProps> = ({ movie }) => {
-  const { t } = useTranslation("edit");
-
   const params = useParams();
   const router = useRouter();
-
-  const {
-    handleSubmit,
-    watch,
-    setValue,
-    formState: { errors },
-    reset,
-  } = useForm<TEditMovieForm>({
-    defaultValues: {
-      title: movie.title,
-      publishYear: movie.publishYear + "",
-    },
-    resolver: yupResolver(editMovieSchema),
-  });
 
   const { mutate } = useUpdateMovieMutation(movie.id, {
     onSuccess: () => {
       console.log("Success");
 
-      reset();
       router.push(`/${params.locale}`);
     },
     onError: (err) => {
       console.log(err);
     },
   });
-
-  const onSelect = (file: File) => {
-    setValue("image", file);
-  };
-
-  const onChange = useCallback(
-    (field: keyof Exclude<TEditMovieForm, "image">) => {
-      return (evt: ChangeEvent<HTMLInputElement>) => {
-        setValue(field, evt.target.value);
-      };
-    },
-    [setValue]
-  );
 
   const onSubmit = useCallback(
     (data: TEditMovieForm) => {
@@ -95,44 +56,15 @@ const EditMovieForm: FC<TEditMovieFormProps> = ({ movie }) => {
   };
 
   return (
-    <Styled.Form onSubmit={handleSubmit(onSubmit)}>
-      <Styled.FilePickerWrapper>
-        <Styled.Form.Row>
-          <FilePicker label={t("filePicker.label")} onSelect={onSelect} />
-          <HelperText value={errors?.image?.message} color="error" />
-        </Styled.Form.Row>
-      </Styled.FilePickerWrapper>
-      <Styled.FieldsWrapper>
-        <Styled.Form.Row>
-          <Input
-            label={t("email.label")}
-            onChange={onChange("title")}
-            value={watch("title")}
-          />
-          <HelperText value={errors?.title?.message} color="error" />
-        </Styled.Form.Row>
-        <Styled.Form.Row>
-          <Styled.Form.PublishYearInput
-            label={t("publishYear.label")}
-            onChange={onChange("publishYear")}
-            value={watch("publishYear")}
-          />
-          <HelperText value={errors?.publishYear?.message} color="error" />
-        </Styled.Form.Row>
-      </Styled.FieldsWrapper>
-      <Styled.Form.Actions>
-        <Button
-          variant="outlined"
-          color="neutral"
-          brightness={0}
-          type="button"
-          onClick={onCancel}
-        >
-          {t("actions.cancel")}
-        </Button>
-        <Button>{t("actions.submit")}</Button>
-      </Styled.Form.Actions>
-    </Styled.Form>
+    <MovieForm
+      onCancel={onCancel}
+      onSubmit={onSubmit}
+      isEdit
+      defaultValues={{
+        title: movie.title,
+        publishYear: movie.publishYear.toString(),
+      }}
+    />
   );
 };
 
