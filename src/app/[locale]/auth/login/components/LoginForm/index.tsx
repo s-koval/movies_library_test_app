@@ -3,6 +3,7 @@
 import { ChangeEvent, FC } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useParams, useRouter } from "next/navigation";
@@ -19,10 +20,11 @@ import { useLoginMutation } from "@core/services/api/hooks/mutations/auth/useLog
 
 import { TLoginForm } from "@core/types/forms/auth";
 
+
 import Styled from "./styled";
 
 const LoginForm: FC = () => {
-  const { t } = useTranslation("login");
+  const { t } = useTranslation(["login", "messages"]);
 
   const router = useRouter();
   const params = useParams();
@@ -44,7 +46,11 @@ const LoginForm: FC = () => {
 
   const { mutate } = useLoginMutation({
     onError: (err) => {
-      console.log(err);
+      toast.error(
+        t(err.response?.data.message || "somethingWentWrong", {
+          ns: "messages",
+        })
+      );
     },
     onSuccess: () => {
       router.push(`/${params.locale}`);

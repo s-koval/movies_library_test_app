@@ -10,6 +10,7 @@ export const i18nNamespaces = [
   "create",
   "edit",
   "templates",
+  "messages",
 ];
 
 export default i18nConfig;

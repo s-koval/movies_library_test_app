@@ -10,5 +10,6 @@ export const useFetchMoviesQuery = (props: TUseFetchMoviesQueryProps = {}) => {
   return useQuery({
     queryKey: [QUERY_KEY, ...Object.values(props)],
     queryFn: () => fetchMoviesQuery(props),
+    retry: false,
   });
 };

@@ -1,0 +1,12 @@
+{
+  "somethingWentWrong": "Something went wrong",
+  "auth": {
+    "invalidCreadentials": "Invalid email or password",
+    "unauthorized": "Unauthorized"
+  },
+  "movie": {
+    "notFound": "Movie is not defined",
+    "created": "Movie successfully created",
+    "updated": "Movie successfully updated"
+  }
+}

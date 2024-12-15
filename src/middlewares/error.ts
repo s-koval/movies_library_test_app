@@ -17,21 +17,21 @@ export const errorMiddleware = (handler: TNextHandler) => {
     } catch (err) {
       console.log(err);
 
-      let message = "Something went wrong";
+      let message = "somethingWentWrong";
       let status = 500;
 
       if (err instanceof ValidationError) {
-        message = err.errors.join(", ");
+        message = "validationError";
         status = 422;
       }
 
       if (err instanceof InvalidEmailOrPasswordError) {
-        message = err.message;
+        message = "auth.invalidCreadentials";
         status = 403;
       }
 
       if (err instanceof MovieNotFoundError) {
-        message = err.message;
+        message = "movie.notFound";
         status = 404;
       }
 
@@ -40,7 +40,7 @@ export const errorMiddleware = (handler: TNextHandler) => {
         err instanceof UnauthorizedError ||
         err instanceof JWTExpired
       ) {
-        message = "Unauthorized";
+        message = "auth.unauthorized";
         status = 401;
       }
 

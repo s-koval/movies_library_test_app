@@ -1,3 +1,5 @@
 {
-  "title": "Create a new movie"
+  "title": "Create a new movie",
+  "loading": "Loading",
+  "notFound": "Movie not found"
 }

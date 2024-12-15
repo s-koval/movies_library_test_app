@@ -1,4 +1,6 @@
 import { FC, useCallback } from "react";
+import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
 
 import { useParams, useRouter } from "next/navigation";
 
@@ -6,9 +8,10 @@ import MovieForm from "@core/templates/MovieForm";
 
 import { useUpdateMovieMutation } from "@core/services/api/hooks/mutations/movies/useUpdateMovieMutation";
 
+import { TMovieForm } from "@core/types/forms/movies";
 import { TUpdateMovieData } from "@core/types/services/api/movie";
 import { TMovie } from "@core/types/services/movie";
-import { TMovieForm } from "@core/types/forms/movies";
+
 
 type TEditMovieFormProps = {
   movie: TMovie;
@@ -18,14 +21,16 @@ const EditMovieForm: FC<TEditMovieFormProps> = ({ movie }) => {
   const params = useParams();
   const router = useRouter();
 
+  const { t } = useTranslation("messages");
+
   const { mutate } = useUpdateMovieMutation(movie.id, {
     onSuccess: () => {
-      console.log("Success");
+      toast.success(t("movie.updated"));
 
       router.push(`/${params.locale}`);
     },
     onError: (err) => {
-      console.log(err);
+      toast.error(t(err.response?.data.message || "somethingWentWrong"));
     },
   });
 
