@@ -1,15 +1,10 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 
 import loginSchema from "@core/validation/auth/loginSchema";
 
 import { AuthService } from "@core/services/auth";
 
 import { errorMiddleware } from "@core/middlewares/error";
-
-import {
-  ACCESS_TOKEN_DEFAULT_EXPIRY,
-  REFRESH_TOKEN_DEFAULT_EXPIRY,
-} from "@core/constants/services/auth";
 
 const authService = new AuthService();
 
@@ -20,29 +15,9 @@ const POST = async (req: NextRequest) => {
     stripUnknown: true,
   });
 
-  const { accessToken, refreshToken } = await authService.login(dto);
+  const tokens = await authService.login(dto);
 
-  const response = NextResponse.json({}, { status: 200 });
-
-  response.cookies.set("refreshToken", refreshToken, {
-    maxAge: dto.rememberMe
-      ? REFRESH_TOKEN_DEFAULT_EXPIRY * 7
-      : REFRESH_TOKEN_DEFAULT_EXPIRY,
-    httpOnly: true,
-    secure: true,
-    sameSite: "strict",
-    path: "/",
-  });
-
-  response.cookies.set("accessToken", accessToken, {
-    maxAge: ACCESS_TOKEN_DEFAULT_EXPIRY,
-    httpOnly: true,
-    secure: true,
-    sameSite: "strict",
-    path: "/",
-  });
-
-  return response;
+  return authService.generateResponse(tokens, dto.rememberMe);
 };
 
 const wrappedPOST = errorMiddleware(POST);

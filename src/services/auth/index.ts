@@ -1,7 +1,10 @@
+import { NextResponse } from "next/server";
+
 import {
   InvalidEmailOrPasswordError,
   UnauthorizedError,
 } from "@core/exceptions/auth";
+
 
 import {
   ACCESS_TOKEN_DEFAULT_EXPIRY,
@@ -21,6 +24,9 @@ import { IAuthService } from "@core/interfaces/services/auth";
 import { HashService } from "../hash";
 import { JwtService } from "../jwt";
 import { UserService } from "../user";
+
+import { TGenerateResponseProps } from "./../../types/services/auth/index";
+
 
 export class AuthService implements IAuthService {
   private readonly userService = new UserService();
@@ -98,5 +104,30 @@ export class AuthService implements IAuthService {
       accessToken,
       refreshToken,
     };
+  }
+
+  generateResponse(
+    tokens: TGenerateResponseProps,
+    rememberMe: boolean = false
+  ): NextResponse {
+    const response = NextResponse.json({});
+
+    response.cookies.set("refreshToken", tokens.refreshToken, {
+      maxAge: rememberMe
+        ? REFRESH_TOKEN_DEFAULT_EXPIRY * 7
+        : REFRESH_TOKEN_DEFAULT_EXPIRY,
+      httpOnly: true,
+      secure: true,
+      sameSite: "strict",
+    });
+
+    response.cookies.set("accessToken", tokens.accessToken, {
+      maxAge: ACCESS_TOKEN_DEFAULT_EXPIRY,
+      httpOnly: true,
+      secure: true,
+      sameSite: "strict",
+    });
+
+    return response;
   }
 }

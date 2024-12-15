@@ -4,6 +4,7 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 
 import { useMediaQuery } from "@uidotdev/usehooks";
+import { useParams } from "next/navigation";
 
 import Link from "@core/components/Link";
 import Typography from "@core/components/Typography";
@@ -13,6 +14,8 @@ import Styled from "./styled";
 const MovieListEmpty: FC = () => {
   const isTable = useMediaQuery("(max-width: 768px)");
 
+  const params = useParams();
+
   const { t } = useTranslation("movies");
 
   return (
@@ -20,7 +23,7 @@ const MovieListEmpty: FC = () => {
       <Typography component="h2" variant={isTable ? "h3" : "h2"} brightness={0}>
         {t("emptyList")}
       </Typography>
-      <Link href="create" color="primary">
+      <Link href={`/${params.locale}/create`} color="primary">
         {t("addMovie")}
       </Link>
     </Styled.Wrapper>
