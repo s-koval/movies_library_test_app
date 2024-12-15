@@ -7,18 +7,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id       String  @unique @default(uuid()) @db.Uuid
-  email    String  @unique @db.VarChar
-  password String  @db.VarChar
-  movies   Movie[]
+model Users {
+  id       String   @unique @default(uuid()) @db.Uuid
+  email    String   @unique @db.VarChar
+  password String   @db.VarChar
+  movies   Movies[]
 }
 
-model Movie {
+model Movies {
   id          String @unique @default(uuid()) @db.Uuid
   title       String @db.VarChar
   publishYear Int    @db.SmallInt
   image       String @db.VarChar
-  user        User   @relation(fields: [userId], references: [id])
+  user        Users  @relation(fields: [userId], references: [id])
   userId      String @db.Uuid
 }

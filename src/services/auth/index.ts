@@ -28,7 +28,7 @@ export class AuthService implements IAuthService {
   private readonly hashService = new HashService();
 
   async login(props: TLoginProps): Promise<TLoginReturnType> {
-    const user = await this.userService.findBy({
+    const user = await this.userService.findFirst({
       where: {
         email: props.email,
       },
@@ -62,7 +62,7 @@ export class AuthService implements IAuthService {
   async refreshTokens(token: string): Promise<TRefreshTokensReturnType> {
     const { payload } = await this.jwtService.verify<TUserJwtPayload>(token);
 
-    const user = await this.userService.findBy({
+    const user = await this.userService.findFirst({
       where: { id: payload.id },
       select: null,
     });

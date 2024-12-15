@@ -18,7 +18,7 @@ const fileService = new FileService();
 const GET = async (req: TAuthRequest, segments: TDynamicSegments) => {
   const { id } = await segments.params;
 
-  const movie = await movieService.findBy({
+  const movie = await movieService.findFirst({
     where: {
       userId: req.user.id,
       id,
@@ -42,7 +42,7 @@ const PUT = async (req: TAuthRequest, segments: TDynamicSegments) => {
 
   const dto = await editMovieSchema.validate(parsed);
 
-  const movie = await movieService.findBy({
+  const movie = await movieService.findFirst({
     where: {
       userId: req.user.id,
       id,

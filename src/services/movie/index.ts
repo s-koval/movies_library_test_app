@@ -13,22 +13,22 @@ import prismaClient from "../db";
 
 export class MovieService implements IMovieService {
   async create(props: TMovieCreateProps): Promise<void> {
-    await prismaClient.movie.create(props);
+    await prismaClient.movies.create(props);
   }
 
-  async findBy(props: TMovieFindByProps): Promise<TMovie | null> {
-    return await prismaClient.movie.findFirst(props);
+  async findFirst(props: TMovieFindByProps): Promise<TMovie | null> {
+    return await prismaClient.movies.findFirst(props);
   }
 
   async findMany(props: TMovieFindManyProps): Promise<TMovie[]> {
-    return await prismaClient.movie.findMany(props);
+    return await prismaClient.movies.findMany(props);
   }
 
   async update(props: TMovieUpdateProps): Promise<void> {
-    await prismaClient.movie.update(props);
+    await prismaClient.movies.update(props);
   }
 
   async count(props: TMovieCountProps): Promise<number> {
-    return await prismaClient.movie.count(props);
+    return await prismaClient.movies.count(props);
   }
 }
