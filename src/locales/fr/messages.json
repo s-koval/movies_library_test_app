@@ -1,0 +1,12 @@
+{
+  "somethingWentWrong": "Une erreur s'est produite",
+  "auth": {
+    "invalidCreadentials": "E-mail ou mot de passe non valide",
+    "unauthorized": "Non autorisé"
+  },
+  "movie": {
+    "notFound": "Le film n'est pas défini",
+    "created": "Le film a été créé avec succès",
+    "updated": "Le film a été mis à jour avec succès"
+  }
+}

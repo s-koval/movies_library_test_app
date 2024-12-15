@@ -5,7 +5,6 @@ import {
   UnauthorizedError,
 } from "@core/exceptions/auth";
 
-
 import {
   ACCESS_TOKEN_DEFAULT_EXPIRY,
   REFRESH_TOKEN_DEFAULT_EXPIRY,
@@ -26,7 +25,6 @@ import { JwtService } from "../jwt";
 import { UserService } from "../user";
 
 import { TGenerateResponseProps } from "./../../types/services/auth/index";
-
 
 export class AuthService implements IAuthService {
   private readonly userService = new UserService();

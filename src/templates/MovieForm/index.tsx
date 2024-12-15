@@ -55,6 +55,10 @@ const MovieForm: FC<TMovieFormProps> = ({
     }
 
     return (evt: ChangeEvent<HTMLInputElement>) => {
+      if (evt.target.validity.patternMismatch) {
+        return;
+      }
+
       setValue(field, evt.target.value);
     };
   }) as TMovieChangeHandler;
@@ -84,6 +88,7 @@ const MovieForm: FC<TMovieFormProps> = ({
             label={t("movieForm.publishYear.label")}
             onChange={onChange("publishYear")}
             value={watch("publishYear")}
+            pattern="\d+"
           />
           <HelperText value={errors?.publishYear?.message} color="error" />
         </Styled.Form.Row>
