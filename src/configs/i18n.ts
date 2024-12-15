@@ -4,6 +4,12 @@ const i18nConfig = {
   prefixDefault: true,
 };
 
-export const i18nNamespaces = ["login", "movies", "create", "edit"];
+export const i18nNamespaces = [
+  "login",
+  "movies",
+  "create",
+  "edit",
+  "templates",
+];
 
 export default i18nConfig;

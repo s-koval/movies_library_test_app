@@ -64,7 +64,7 @@ const MovieForm: FC<TMovieFormProps> = ({
       <Styled.FilePickerWrapper>
         <Styled.Form.Row>
           <FilePicker
-            label={t("filePicker.label")}
+            label={t("movieForm.filePicker.label")}
             onSelect={onChange("image")}
           />
           <HelperText value={errors?.image?.message} color="error" />
@@ -73,7 +73,7 @@ const MovieForm: FC<TMovieFormProps> = ({
       <Styled.FieldsWrapper>
         <Styled.Form.Row>
           <Input
-            label={t("email.label")}
+            label={t("movieForm.title.label")}
             onChange={onChange("title")}
             value={watch("title")}
           />
@@ -81,7 +81,7 @@ const MovieForm: FC<TMovieFormProps> = ({
         </Styled.Form.Row>
         <Styled.Form.Row>
           <Styled.Form.PublishYearInput
-            label={t("publishYear.label")}
+            label={t("movieForm.publishYear.label")}
             onChange={onChange("publishYear")}
             value={watch("publishYear")}
           />
@@ -96,9 +96,9 @@ const MovieForm: FC<TMovieFormProps> = ({
           type="button"
           onClick={onCancel}
         >
-          {t("actions.cancel")}
+          {t("movieForm.actions.cancel")}
         </Button>
-        <Button>{t("actions.submit")}</Button>
+        <Button>{t("movieForm.actions.submit")}</Button>
       </Styled.Form.Actions>
     </Styled.Form>
   );

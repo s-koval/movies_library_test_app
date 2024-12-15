@@ -1,16 +1,3 @@
 {
-  "title": "Modifier",
-  "filePicker": {
-    "label": "Déposez une image ici"
-  },
-  "email": {
-    "label": "Email"
-  },
-  "publishYear": {
-    "label": "Année de publication"
-  },
-  "actions": {
-    "submit": "Soumettre",
-    "cancel": "Annuler"
-  }
+  "title": "Modifier"
 }

@@ -1,0 +1,17 @@
+{
+  "movieForm": {
+    "filePicker": {
+      "label": "Drop an image here"
+    },
+    "title": {
+      "label": "Title"
+    },
+    "publishYear": {
+      "label": "Publish year"
+    },
+    "actions": {
+      "submit": "Submit",
+      "cancel": "Cancel"
+    }
+  }
+}

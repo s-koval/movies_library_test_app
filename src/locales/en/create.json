@@ -1,16 +1,3 @@
 {
-  "title": "Create a new movie",
-  "filePicker": {
-    "label": "Drop an image here"
-  },
-  "email": {
-    "label": "Email"
-  },
-  "publishYear": {
-    "label": "Publish year"
-  },
-  "actions": {
-    "submit": "Submit",
-    "cancel": "Cancel"
-  }
+  "title": "Create a new movie"
 }

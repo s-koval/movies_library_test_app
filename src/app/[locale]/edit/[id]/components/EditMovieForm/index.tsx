@@ -6,10 +6,9 @@ import MovieForm from "@core/templates/MovieForm";
 
 import { useUpdateMovieMutation } from "@core/services/api/hooks/mutations/movies/useUpdateMovieMutation";
 
-import { TEditMovieForm } from "@core/types/forms/movies/edit";
 import { TUpdateMovieData } from "@core/types/services/api/movie";
 import { TMovie } from "@core/types/services/movie";
-
+import { TMovieForm } from "@core/types/forms/movies";
 
 type TEditMovieFormProps = {
   movie: TMovie;
@@ -31,7 +30,7 @@ const EditMovieForm: FC<TEditMovieFormProps> = ({ movie }) => {
   });
 
   const onSubmit = useCallback(
-    (data: TEditMovieForm) => {
+    (data: TMovieForm) => {
       const transformedData: TUpdateMovieData = {};
 
       if (data.title !== movie.title) {

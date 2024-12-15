@@ -48,7 +48,7 @@ const MovieList: FC = () => {
   );
 
   if (isLoading) {
-    return <div>Loading</div>;
+    return <div>{t("loading")}</div>;
   }
 
   if (!data?.total) {

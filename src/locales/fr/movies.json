@@ -6,5 +6,6 @@
     "logout": "Déconnexion",
     "next": "Suivante",
     "prev": "Précédente"
-  }
+  },
+  "loading": "Chargement"
 }
