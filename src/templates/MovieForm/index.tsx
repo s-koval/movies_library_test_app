@@ -29,7 +29,10 @@ const MovieForm: FC<TMovieFormProps> = ({
   onSubmit,
   onCancel,
   isEdit = false,
-  defaultValues,
+  defaultValues = {
+    publishYear: "",
+    title: "",
+  },
 }) => {
   const { t } = useTranslation("templates");
 

@@ -1,27 +1,19 @@
 "use client";
 
 import { FC } from "react";
-import { useTranslation } from "react-i18next";
 
-import { useMediaQuery } from "@uidotdev/usehooks";
-
-import Typography from "@core/components/Typography";
+import dynamic from "next/dynamic";
 
 import CreateMovieForm from "../CreateMovieForm";
 
 import Styled from "./styled";
 
+const CreateHeading = dynamic(() => import("../CreateHeading"), { ssr: false });
 
 const CreateContent: FC = () => {
-  const isTable = useMediaQuery("(max-width: 768px)");
-
-  const { t } = useTranslation("create");
-
   return (
     <Styled.Wrapper>
-      <Typography variant={isTable ? "h3" : "h2"} component="h2" brightness={0}>
-        {t("title")}
-      </Typography>
+      <CreateHeading />
       <CreateMovieForm />
     </Styled.Wrapper>
   );

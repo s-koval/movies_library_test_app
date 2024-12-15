@@ -1,11 +1,8 @@
 "use client";
 
 import React, { FC } from "react";
-import { useTranslation } from "react-i18next";
 
-import { useMediaQuery } from "@uidotdev/usehooks";
-
-import Typography from "@core/components/Typography";
+import dynamic from "next/dynamic";
 
 import { useFetchMovieQuery } from "@core/services/api/hooks/queries/movies/useFetchMovieQuery";
 
@@ -13,15 +10,13 @@ import EditMovieForm from "../EditMovieForm";
 
 import Styled from "./styled";
 
+const EditHeading = dynamic(() => import("../EditHeading"), { ssr: false });
+
 type TEditMovieContent = {
   id: string;
 };
 
 const EditContent: FC<TEditMovieContent> = ({ id }) => {
-  const isTable = useMediaQuery("(max-width: 768px)");
-
-  const { t } = useTranslation("edit");
-
   const { data } = useFetchMovieQuery(id);
 
   if (!data) {
@@ -30,9 +25,7 @@ const EditContent: FC<TEditMovieContent> = ({ id }) => {
 
   return (
     <Styled.Wrapper>
-      <Typography variant={isTable ? "h3" : "h2"} component="h2" brightness={0}>
-        {t("title")}
-      </Typography>
+      <EditHeading />
       <EditMovieForm movie={data} />
     </Styled.Wrapper>
   );

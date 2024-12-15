@@ -2,10 +2,13 @@
 
 import { FC } from "react";
 
-import HomeHeading from "../HomeHeading";
+import dynamic from "next/dynamic";
+
 import MovieList from "../MovieList";
 
 import Styled from "./styled";
+
+const HomeHeading = dynamic(() => import("../HomeHeading"), { ssr: false });
 
 const HomeContent: FC = () => {
   return (
