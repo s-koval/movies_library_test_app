@@ -1,10 +1,10 @@
 import * as yup from "yup";
 
 const editMovieSchema = yup.object({
-  title: yup.string().min(3),
+  title: yup.string().min(3, "movieSchema.title.min"),
   publishYear: yup
     .string()
-    .test("isValidYear", "Publish year is invalid", (value) => {
+    .test("isValidYear", "movieSchema.publishYear.test", (value) => {
       if (!value) {
         return true;
       }
@@ -19,10 +19,10 @@ const editMovieSchema = yup.object({
     }),
   image: yup
     .mixed<File>()
-    .test("isImage", "Uploaded media is invalid", (value) =>
+    .test("isImage", "movieSchema.image.test", (value) =>
       value ? value instanceof File : true
     )
-    .test((value) =>
+    .test("isValidExt", "movieSchema.image.test", (value) =>
       value ? RegExp(/(jpeg|png|tiff|webp)$/).test(value.name) : true
     ),
 });

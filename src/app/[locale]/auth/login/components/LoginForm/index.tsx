@@ -20,11 +20,10 @@ import { useLoginMutation } from "@core/services/api/hooks/mutations/auth/useLog
 
 import { TLoginForm } from "@core/types/forms/auth";
 
-
 import Styled from "./styled";
 
 const LoginForm: FC = () => {
-  const { t } = useTranslation(["login", "messages"]);
+  const { t } = useTranslation(["login", "messages", "validations"]);
 
   const router = useRouter();
   const params = useParams();
@@ -86,7 +85,13 @@ const LoginForm: FC = () => {
             value={watch("email")}
             type="email"
           />
-          <HelperText value={errors?.email?.message} color="error" />
+          <HelperText
+            value={
+              errors?.email?.message &&
+              t(errors?.email?.message, { ns: "validations" })
+            }
+            color="error"
+          />
         </Styled.Form.Row>
         <Styled.Form.Row>
           <Input
@@ -95,7 +100,13 @@ const LoginForm: FC = () => {
             value={watch("password")}
             type="password"
           />
-          <HelperText value={errors?.password?.message} color="error" />
+          <HelperText
+            value={
+              errors?.password?.message &&
+              t(errors?.password?.message, { ns: "validations" })
+            }
+            color="error"
+          />
         </Styled.Form.Row>
       </Styled.Form.ControlsWrapper>
       <CheckBox

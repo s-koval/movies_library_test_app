@@ -1,0 +1,29 @@
+{
+  "loginSchema": {
+    "email": {
+      "required": "Email is required",
+      "email": "Invalid email"
+    },
+    "password": {
+      "required": "Password is required",
+      "min": "Password min length 6 symbols"
+    },
+    "rememberMe": {
+      "required": "Remember me is required"
+    }
+  },
+  "movieSchema": {
+    "title": {
+      "min": "Title min length 3 symbols",
+      "required": "Title is required field"
+    },
+    "publishYear": {
+      "required": "Publish year is required",
+      "test": "Publish year min is 1900 and max 2100"
+    },
+    "image": {
+      "required": "Image is required",
+      "test": "Image should be pbg, jpeg, tiff or webp"
+    }
+  }
+}

@@ -1,9 +1,9 @@
-import { Movie, Prisma } from "@prisma/client";
+import { Movies, Prisma } from "@prisma/client";
 
-export type TMovie = Movie;
+export type TMovie = Movies;
 
-export type TMovieCreateProps = Prisma.MovieCreateArgs;
-export type TMovieFindByProps = Prisma.MovieFindFirstArgs;
-export type TMovieFindManyProps = Prisma.MovieFindManyArgs;
-export type TMovieUpdateProps = Prisma.MovieUpdateArgs;
-export type TMovieCountProps = Prisma.MovieCountArgs;
+export type TMoviesCreateProps = Prisma.MoviesCreateArgs;
+export type TMoviesFindByProps = Prisma.MoviesFindFirstArgs;
+export type TMoviesFindManyProps = Prisma.MoviesFindManyArgs;
+export type TMoviesUpdateProps = Prisma.MoviesUpdateArgs;
+export type TMoviesCountProps = Prisma.MoviesCountArgs;

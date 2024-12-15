@@ -1,8 +1,8 @@
-import { Prisma, User } from "@prisma/client";
+import { Prisma, Users } from "@prisma/client";
 
-export type TUser = User;
+export type TUser = Users;
 
-export type TUserFindByProps = Prisma.UserFindFirstArgs;
+export type TUsersFindFirstProps = Prisma.UsersFindFirstArgs;
 
 export type TUserJwtPayload = {
   id: string;

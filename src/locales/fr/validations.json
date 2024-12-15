@@ -1,0 +1,29 @@
+{
+  "loginSchema": {
+    "email": {
+      "required": "L'adresse e-mail est obligatoire",
+      "email": "E-mail invalide"
+    },
+    "password": {
+      "required": "Le mot de passe est obligatoire",
+      "min": "Le mot de passe doit avoir une longueur minimale de 6 symboles"
+    },
+    "rememberMe": {
+      "required": "Se souvenir de moi est obligatoire"
+    }
+  },
+  "movieSchema": {
+    "title": {
+      "min": "Le titre doit avoir une longueur minimale de 3 symboles",
+      "required": "Le titre est un champ obligatoire"
+    },
+    "publishYear": {
+      "required": "L'année de publication est obligatoire",
+      "test": "L'année de publication minimale est 1900 et maximale 2100"
+    },
+    "image": {
+      "required": "L'image est obligatoire",
+      "test": "L'image doit être au format pbg, jpeg, tiff ou webp"
+    }
+  }
+}

@@ -34,7 +34,7 @@ const MovieForm: FC<TMovieFormProps> = ({
     title: "",
   },
 }) => {
-  const { t } = useTranslation("templates");
+  const { t } = useTranslation(["templates", "validations"]);
 
   const {
     setValue,
@@ -71,7 +71,13 @@ const MovieForm: FC<TMovieFormProps> = ({
             label={t("movieForm.filePicker.label")}
             onSelect={onChange("image")}
           />
-          <HelperText value={errors?.image?.message} color="error" />
+          <HelperText
+            value={
+              errors?.image?.message &&
+              t(errors?.image?.message, { ns: "validations" })
+            }
+            color="error"
+          />
         </Styled.Form.Row>
       </Styled.FilePickerWrapper>
       <Styled.FieldsWrapper>
@@ -81,7 +87,13 @@ const MovieForm: FC<TMovieFormProps> = ({
             onChange={onChange("title")}
             value={watch("title")}
           />
-          <HelperText value={errors?.title?.message} color="error" />
+          <HelperText
+            value={
+              errors?.title?.message &&
+              t(errors?.title?.message, { ns: "validations" })
+            }
+            color="error"
+          />
         </Styled.Form.Row>
         <Styled.Form.Row>
           <Styled.Form.PublishYearInput
@@ -90,7 +102,13 @@ const MovieForm: FC<TMovieFormProps> = ({
             value={watch("publishYear")}
             pattern="\d+"
           />
-          <HelperText value={errors?.publishYear?.message} color="error" />
+          <HelperText
+            value={
+              errors?.publishYear?.message &&
+              t(errors?.publishYear?.message, { ns: "validations" })
+            }
+            color="error"
+          />
         </Styled.Form.Row>
       </Styled.FieldsWrapper>
       <Styled.Form.Actions>

@@ -11,6 +11,7 @@ export const i18nNamespaces = [
   "edit",
   "templates",
   "messages",
+  "validations",
 ];
 
 export default i18nConfig;

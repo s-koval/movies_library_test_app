@@ -1,16 +1,16 @@
 import {
   TMovie,
-  TMovieCountProps,
-  TMovieCreateProps,
-  TMovieFindByProps,
-  TMovieFindManyProps,
-  TMovieUpdateProps,
+  TMoviesCountProps,
+  TMoviesCreateProps,
+  TMoviesFindByProps,
+  TMoviesFindManyProps,
+  TMoviesUpdateProps,
 } from "@core/types/services/movie";
 
 export interface IMovieService {
-  create(props: TMovieCreateProps): Promise<void>;
-  findFirst(props: TMovieFindByProps): Promise<TMovie | null>;
-  findMany(props: TMovieFindManyProps): Promise<TMovie[]>;
-  update(props: TMovieUpdateProps): Promise<void>;
-  count(props: TMovieCountProps): Promise<number>;
+  create(props: TMoviesCreateProps): Promise<void>;
+  findFirst(props: TMoviesFindByProps): Promise<TMovie | null>;
+  findMany(props: TMoviesFindManyProps): Promise<TMovie[]>;
+  update(props: TMoviesUpdateProps): Promise<void>;
+  count(props: TMoviesCountProps): Promise<number>;
 }
