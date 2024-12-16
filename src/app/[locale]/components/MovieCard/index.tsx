@@ -1,5 +1,7 @@
 import { FC } from "react";
 
+import { useMediaQuery } from "@uidotdev/usehooks";
+
 import Typography from "@core/components/Typography";
 
 import { TMovie } from "@core/types/services/movie";
@@ -12,11 +14,13 @@ type TMovieCardProps = {
 };
 
 const MovieCard: FC<TMovieCardProps> = ({ movie, onClick }) => {
+  const isTablet = useMediaQuery("(max-width: 768px)");
+
   return (
     <Styled.Wrapper onClick={() => onClick(movie.id)}>
       <Styled.Image src={`/uploads/${movie.image}`} />
       <Styled.Content>
-        <Typography variant="body-lg" brightness={0}>
+        <Typography variant={isTablet ? "body" : "body-lg"} brightness={0}>
           {movie.title}
         </Typography>
         <Typography variant="body-sm" brightness={0}>

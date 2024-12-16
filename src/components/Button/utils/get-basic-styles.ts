@@ -4,6 +4,7 @@ type TGetBasicStylesProps = {
   borderRadius: TUnits;
   fontSize: TUnits;
   fontWeight: number;
+  lineHeight: TUnits;
 };
 
 const getBasicStyles = (props: TGetBasicStylesProps) => {
@@ -16,6 +17,7 @@ const getBasicStyles = (props: TGetBasicStylesProps) => {
 
     font-size: ${props.fontSize};
     font-weight: ${props.fontWeight};
+    line-height: ${props.lineHeight};
 
     display: flex;
     align-items: center;

@@ -2,6 +2,8 @@
 
 import { ChangeEvent, DragEvent, FC, useId } from "react";
 
+import DownloadIcon from "@core/icons/Download";
+
 import Styled from "./styled";
 
 type TFilePickerProps = {
@@ -39,7 +41,10 @@ const FilePicker: FC<TFilePickerProps> = ({ label, onSelect }) => {
   return (
     <Styled.FilePicker.Wrapper onDragOver={onDragOver} onDrop={onDrop}>
       <Styled.FilePicker type="file" id={id} onChange={onChange} />
-      <Styled.FilePicker.Label htmlFor={id}>{label}</Styled.FilePicker.Label>
+      <Styled.FilePicker.Label htmlFor={id}>
+        <DownloadIcon size={24} />
+        {label}
+      </Styled.FilePicker.Label>
     </Styled.FilePicker.Wrapper>
   );
 };

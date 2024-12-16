@@ -12,11 +12,11 @@ const Button = styled(RootButton)(
   border-radius: ${props.theme.borderRadius.xs};
 
   &.prev-btn {
-    margin-right: 8px;
+    margin-right: 10px;
   }
 
   &.next-btn {
-    margin-left: 8px;
+    margin-left: 10px;
   }
 
   &.next-btn,

@@ -15,6 +15,13 @@ const Wrapper = styled.div(
     &:hover {
       background-color: ${props.theme.colors.secondary[400]};
     }
+
+    @media screen and (max-width: 546px) {
+      padding: 0;
+      padding-bottom: ${props.theme.spacing.regular};
+
+      overflow: hidden;
+    }
 `
 );
 
@@ -23,23 +30,44 @@ const Image = styled.img(
   width: 100%;
   max-height: 400px;
 
-  aspect-ratio: 1 / 1.37;
-
+  aspect-ratio: 1 / 1.51;
+  
   object-fit: cover;
   object-position: center;
 
   border-radius: ${props.theme.borderRadius.lg};
+
+  @media screen and (max-width: 546px) {
+    aspect-ratio: 1 / 1.37;
+
+    border-radius: 0;
+  }
 `
 );
 
-const Content = styled.div`
-  margin-top: 16px;
+const Content = styled.div(
+  (props) => `
+  margin-top: ${props.theme.spacing.regular};
 
-  padding-inline: 8px;
+  padding-inline: ${props.theme.spacing.sm};
 
   display: flex;
   flex-direction: column;
   gap: 8px;
-`;
+
+  @media screen and (max-width: 546px) {
+    margin-top: ${props.theme.spacing.sm};
+    padding-inline: ${props.theme.spacing.regular};
+
+    & > :first-of-type {
+      font-weight: ${props.theme.font.weight.bold};
+    }
+
+    & > :last-of-type {
+      margin-top: ${props.theme.spacing.sm};
+    }
+  }
+`
+);
 
 export default { Wrapper, Image, Content };

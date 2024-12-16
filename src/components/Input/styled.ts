@@ -28,7 +28,7 @@ const InputLabel = styled.label(
   (props) => `
     position: absolute;
 
-    inset: 33px ${props.theme.spacing.md} 0;
+    inset: 36px ${props.theme.spacing.md} 0;
 
     transition: inset .2s ease, color .2s ease;
 
@@ -50,7 +50,7 @@ const Input = styled.input(
   (props) => `
         width: 100%;
   
-        padding: ${props.theme.spacing.regular} ${props.theme.spacing.md};
+        padding: calc(${props.theme.spacing.regular} + 2px) ${props.theme.spacing.md};
 
         border: 1px solid ${props.theme.colors.secondary[400]};
         border-radius: ${props.theme.borderRadius.md};
@@ -60,6 +60,9 @@ const Input = styled.input(
         transition: background-color .2s ease;
 
         outline: none;
+
+        font-size: ${props.theme.font.size["body-sm"]};
+        font-weight: ${props.theme.font.weight.regular};
     `
 );
 

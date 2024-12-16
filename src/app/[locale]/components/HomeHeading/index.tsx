@@ -6,7 +6,6 @@ import { useTranslation } from "react-i18next";
 import { useMediaQuery } from "@uidotdev/usehooks";
 import { useParams, useRouter } from "next/navigation";
 
-import AddIcon from "@core/icons/Add";
 import LogoutIcon from "@core/icons/Logout";
 
 import Link from "@core/components/Link";
@@ -46,7 +45,7 @@ const HomeHeading: FC = () => {
           {t("title")}
         </Typography>
         <Link href={`/${params.locale}/create`} variant="text">
-          <AddIcon size={isTable ? 24 : 32} />
+          <Styled.AddIcon size={isTable ? 24 : 32} />
         </Link>
       </Styled.TitleWrapper>
       <Styled.LogoutButton onClick={onLogout}>

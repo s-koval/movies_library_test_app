@@ -2,9 +2,11 @@
 
 import { FC } from "react";
 
-import LoginForm from "../LoginForm";
+import dynamic from "next/dynamic";
 
 import Styled from "./styled";
+
+const LoginForm = dynamic(() => import("../LoginForm"), { ssr: false });
 
 const LoginContent: FC = () => (
   <Styled.Wrapper>

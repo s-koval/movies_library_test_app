@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useMediaQuery } from "@uidotdev/usehooks";
 import { useParams, useRouter } from "next/navigation";
 
 import loginSchema from "@core/validation/auth/loginSchema";
@@ -24,6 +25,8 @@ import Styled from "./styled";
 
 const LoginForm: FC = () => {
   const { t } = useTranslation(["login", "messages", "validations"]);
+
+  const isTablet = useMediaQuery("(max-width: 768px)");
 
   const router = useRouter();
   const params = useParams();
@@ -74,7 +77,11 @@ const LoginForm: FC = () => {
 
   return (
     <Styled.Form onSubmit={handleSubmit(onSubmit)}>
-      <Typography component="h1" variant="h1" brightness={0}>
+      <Typography
+        component="h1"
+        variant={isTablet ? "h2" : "h1"}
+        brightness={0}
+      >
         {t("title")}
       </Typography>
       <Styled.Form.ControlsWrapper>

@@ -8,9 +8,9 @@ const Form = styled.form(
 
   max-width: 960px;
   display: grid;
-  grid-template-columns: 1.3fr 1fr;
+  grid-template-columns: 1.31fr 1fr;
   grid-template-rows: min-content 1fr;
-  column-gap: clamp(24px, 8vw, 127px);
+  column-gap: 127px;
 
   @media screen and (max-width: 546px) {
     margin-top: ${props.theme.spacing["5xl"]};
@@ -40,15 +40,15 @@ const FieldsWrapper = styled.div`
 
   display: flex;
   flex-direction: column;
-  gap: 8px;
 `;
 
-const FormActions = styled.div`
+const FormActions = styled.div(
+  (props) => `
   display: flex;
   align-items: flex-start;
   gap: 16px;
 
-  margin-top: 40px;
+  margin-top: ${props.theme.spacing["4xl"]};
 
   grid-column: 2/3;
 
@@ -56,12 +56,23 @@ const FormActions = styled.div`
     flex: 1;
   }
 
+  & > :last-of-type {
+    flex: 1.1;
+  }
+
   @media screen and (max-width: 546px) {
     grid-column: auto;
 
     grid-row: 3/3;
+
+    margin-top: ${props.theme.spacing["2xl"]};
+
+    & > :last-of-type {
+      flex: 1;
+    }
   }
-`;
+`
+);
 
 const FormRow = styled.div`
   display: flex;

@@ -10,6 +10,7 @@ const Button = styled.button<TStyledButtonProps>((props) => {
     borderRadius: props.theme.borderRadius.lg,
     fontSize: props.theme.font.size.body,
     fontWeight: props.theme.font.weight["semi-bold"],
+    lineHeight: props.theme.font.lineHeight["body-sm"],
   });
 
   let styles: string = "";
@@ -38,7 +39,9 @@ const Button = styled.button<TStyledButtonProps>((props) => {
   
             border: 1px solid transparent;
   
-            padding: ${props.theme.spacing.md} ${props.theme.spacing.lg};
+            padding: calc(${props.theme.spacing.md} - 3px) ${
+        props.theme.spacing.lg
+      };
   
             &:hover,
             &:focus-visible,
@@ -59,7 +62,9 @@ const Button = styled.button<TStyledButtonProps>((props) => {
   
             transition: border-color 0.2s ease, color 0.2s ease;
   
-            padding: ${props.theme.spacing.md} ${props.theme.spacing.lg};
+            padding: calc(${props.theme.spacing.md} - 3px) ${
+        props.theme.spacing.lg
+      };
   
             &:hover,
             &:focus-visible,

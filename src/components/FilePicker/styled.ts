@@ -15,6 +15,10 @@ const InputWrapper = styled.div(
   justify-content: center;
 
   border: 2px dotted ${props.theme.colors.neutral[0]};
+
+  @media screen and (max-width: 546px) {
+    aspect-ratio: 1.02 / 1;
+  }
 `
 );
 
@@ -22,7 +26,19 @@ const Input = styled.input`
   display: none;
 `;
 
-const InputLabel = styled.label``;
+const InputLabel = styled.label`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  @media screen and (max-width: 546px) {
+    gap: 10px;
+
+    margin-top: -4px;
+  }
+`;
 
 export default {
   FilePicker: Object.assign(Input, {

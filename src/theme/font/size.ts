@@ -8,7 +8,7 @@ export const fontSizes: TFontSizes = {
   "body-lg": "20px",
   h1: "60px",
   h2: "48px",
-  h3: "36px",
+  h3: "32px",
   h4: "30px",
   h5: "24px",
   h6: "20px",

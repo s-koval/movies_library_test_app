@@ -1,3 +1,5 @@
 {
-  "title": "Modifier"
+  "title": "Modifier",
+  "loading": "Chargement",
+  "notFound": "Le film n'est pas défini"
 }

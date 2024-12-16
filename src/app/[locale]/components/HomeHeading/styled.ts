@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import RootAddIcon from "@core/icons/Add";
+
 const Wrapper = styled.div(
   (props) => `
   display: flex;
@@ -20,12 +22,22 @@ const TitleWrapper = styled.div`
   gap: 12px;
 `;
 
+const AddIcon = styled(RootAddIcon)`
+  margin-top: 8px;
+
+  @media screen and (max-width: 546px) {
+    margin-top: 0px;
+  }
+`;
+
 const LogoutButton = styled.button(
   (props) => `
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
+    gap: ${props.theme.spacing.md};
+
+    padding: 0;
 
     color: ${props.theme.colors.neutral[0]};
 
@@ -57,4 +69,4 @@ const LogoutButton = styled.button(
   `
 );
 
-export default { Wrapper, TitleWrapper, LogoutButton };
+export default { Wrapper, TitleWrapper, LogoutButton, AddIcon };

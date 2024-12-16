@@ -28,7 +28,7 @@ const Pagination: FC<TPaginationProps> = ({
 
   return (
     <Styled.Pagination>
-      {page > 0 && (
+      {
         <Styled.Pagination.Button
           variant="text"
           color="neutral"
@@ -38,7 +38,7 @@ const Pagination: FC<TPaginationProps> = ({
         >
           {labels.prev}
         </Styled.Pagination.Button>
-      )}
+      }
       {Array.from({ length: pages }).map((_, idx) => (
         <Styled.Pagination.Button
           key={idx}
