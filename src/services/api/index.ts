@@ -1,13 +1,13 @@
 import axios from "axios";
 
-import { ApiResponseIntercetor } from "./interceptors/ApiResponseInterceptor";
+import { ApiResponseInterceptor } from "./interceptors/ApiResponseInterceptor";
 
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
   withCredentials: true,
 });
 
-const apiResInterceptor = new ApiResponseIntercetor();
+const apiResInterceptor = new ApiResponseInterceptor();
 
 api.interceptors.response.use(
   (response) => response,

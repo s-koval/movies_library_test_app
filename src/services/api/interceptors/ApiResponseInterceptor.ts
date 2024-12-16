@@ -3,7 +3,7 @@ import { TApiError, TFailedRequest } from "@core/types/services/api";
 import api from "..";
 import refreshTokensMutation from "../handlers/mutations/auth/refreshTokensMutation";
 
-export class ApiResponseIntercetor {
+export class ApiResponseInterceptor {
   private isFetching = false;
   private failedRequests: TFailedRequest[] = [];
 
@@ -42,7 +42,7 @@ export class ApiResponseIntercetor {
         this.isFetching = true;
 
         return new Promise((resolve, reject) => {
-          refreshTokensMutation()
+          refreshTokensMutation('')
             .then(() => {
               this.processQueue(null);
               resolve(api(originalRequest));

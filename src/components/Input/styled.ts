@@ -56,6 +56,7 @@ const Input = styled.input(
         border-radius: ${props.theme.borderRadius.md};
 
         background-color: ${props.theme.colors.secondary[400]};
+        color: white;
 
         transition: background-color .2s ease;
 

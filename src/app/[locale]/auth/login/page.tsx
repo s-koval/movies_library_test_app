@@ -1,7 +1,6 @@
 import { FC } from "react";
 
 import { i18nNamespaces } from "@core/configs/i18n";
-import { TDefaultPageProps } from "@core/types";
 
 import initTranslations from "@core/app/i18n";
 
@@ -9,7 +8,7 @@ import TranslationsProvider from "@core/providers/TranslationProvider";
 
 import LoginContent from "./components/LoginContent";
 
-type TLoginPageProps = TDefaultPageProps;
+type TLoginPageProps = { params: Promise<{ locale: string }> };
 
 const LoginPage: FC<TLoginPageProps> = async ({ params }) => {
   const { locale } = await params;

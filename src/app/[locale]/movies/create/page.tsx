@@ -1,7 +1,6 @@
 import { FC } from "react";
 
 import { i18nNamespaces } from "@core/configs/i18n";
-import { TDefaultPageProps } from "@core/types";
 
 import initTranslations from "@core/app/i18n";
 
@@ -11,7 +10,7 @@ import TranslationsProvider from "@core/providers/TranslationProvider";
 
 import CreateContent from "./components/CreateContent";
 
-type TCreatePageProps = TDefaultPageProps;
+type TCreatePageProps = { params: Promise<{ locale: string }> };
 
 const CreatePage: FC<TCreatePageProps> = async ({ params }) => {
   const { locale } = await params;

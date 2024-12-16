@@ -1,6 +1,6 @@
 "use client";
 
-import { FC } from "react";
+import { FC, Suspense } from "react";
 
 import dynamic from "next/dynamic";
 
@@ -13,8 +13,10 @@ const HomeHeading = dynamic(() => import("../HomeHeading"), { ssr: false });
 const HomeContent: FC = () => {
   return (
     <Styled.Wrapper>
-      <HomeHeading />
-      <MovieList />
+      <Suspense>
+        <HomeHeading />
+        <MovieList />
+      </Suspense>
     </Styled.Wrapper>
   );
 };
