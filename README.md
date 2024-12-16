@@ -25,6 +25,18 @@ NEXT_PUBLIC_API_URL=http://localhost:3000/api
 
 - Replace `your_database_url`, `your_jwt_secret`, and `your_hash_salt` with appropriate values for your setup.
 
+Generate Prisma client:
+
+```bash
+npx prisma generate
+```
+
+Create test user:
+
+```bash
+npx prisma db seed
+```
+
 ### 3. Project Structure
 
 The project is organized into the following directories:
@@ -50,7 +62,7 @@ The project is organized into the following directories:
 
 ### 4. Run the Project
 
-Once dependencies are installed and the `.env` file is configured, start the development server:
+Once dependencies are installed, `.env` file is configured, Prisma client and user generated, start the development server:
 
 ```bash
 npm run dev
