@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const Wrapper = styled.div(
   (props) => `
-    padding: 8px 8px 16px 8px;
+    padding: ${props.theme.spacing.sm} ${props.theme.spacing.sm} ${props.theme.spacing.md} ${props.theme.spacing.sm};
 
     background-color: ${props.theme.colors.secondary[600]};
 

@@ -17,7 +17,9 @@ const Button = styled.button<TStyledButtonProps>((props) => {
 
   let hover: string;
 
-  if (props.$brightness === 900) {
+  if (props.$brightness < 400) {
+    hover = props.theme.colors[props.$color][400];
+  } else if (props.$brightness === 900) {
     hover = props.theme.colors[props.$color][900];
   } else {
     hover =

@@ -22,7 +22,11 @@ type TMovieFormProps = {
   onSubmit: (data: TMovieForm) => void;
   onCancel: () => void;
   isEdit?: boolean;
-  defaultValues?: TMovieForm;
+  defaultValues?: {
+    title?: string;
+    image?: string | File;
+    publishYear: string;
+  };
 };
 
 const MovieForm: FC<TMovieFormProps> = ({
@@ -44,7 +48,11 @@ const MovieForm: FC<TMovieFormProps> = ({
   } = useForm<TMovieForm>({
     resolver: yupResolver(isEdit ? editMovieSchema : createMovieSchema),
     reValidateMode: "onChange",
-    defaultValues,
+    defaultValues: {
+      ...defaultValues,
+      image:
+        defaultValues.image instanceof File ? defaultValues.image : undefined,
+    },
   });
 
   const onChange = ((field: keyof TMovieForm) => {
@@ -70,6 +78,7 @@ const MovieForm: FC<TMovieFormProps> = ({
           <FilePicker
             label={t("movieForm.filePicker.label")}
             onSelect={onChange("image")}
+            value={watch("image") ?? defaultValues?.image}
           />
           <HelperText
             value={

@@ -28,7 +28,7 @@ NEXT_PUBLIC_API_URL=http://localhost:3000/api
 Generate Prisma client:
 
 ```bash
-npx prisma generate
+npx prisma db push
 ```
 
 Create test user:
@@ -55,7 +55,6 @@ The project is organized into the following directories:
 - **providers**: Context providers for managing global state.
 - **regestries**: Dynamic module or component registries.
 - **services**: Business logic and API service files.
-- **templates**: Predefined page or UI templates.
 - **theme**: Theme configuration and styling.
 - **types**: TypeScript type definitions.
 - **validations**: Input validation schemas and logic.

@@ -66,6 +66,7 @@ const EditMovieForm: FC<TEditMovieFormProps> = ({ movie }) => {
       defaultValues={{
         title: movie.title,
         publishYear: movie.publishYear.toString(),
+        image: `/uploads/${movie.image}`,
       }}
     />
   );

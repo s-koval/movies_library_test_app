@@ -7,7 +7,9 @@ const CheckBoxLabel = styled.label`
 `;
 
 const CheckBox = styled.input`
-  display: none;
+  opacity: 0;
+
+  position: absolute;
 `;
 
 export default {

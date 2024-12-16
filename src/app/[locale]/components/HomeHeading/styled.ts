@@ -22,13 +22,19 @@ const TitleWrapper = styled.div`
   gap: 12px;
 `;
 
-const AddIcon = styled(RootAddIcon)`
-  margin-top: 8px;
+const AddIcon = styled(RootAddIcon)(
+  (props) => `
+  margin-top: ${props.theme.spacing.sm};
+
+  &:hover, &:focus-within {
+    fill: ${props.theme.colors.neutral[400]};
+  }
 
   @media screen and (max-width: 546px) {
     margin-top: 0px;
   }
-`;
+`
+);
 
 const LogoutButton = styled.button(
   (props) => `

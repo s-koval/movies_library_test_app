@@ -1,4 +1,3 @@
-
 import crypto from "crypto";
 import fs from "fs";
 import path from "path";
@@ -10,7 +9,7 @@ import { IFileService } from "@core/interfaces/services/file";
 export class FileService implements IFileService {
   async upload(file: File): Promise<string> {
     try {
-      const name = `${crypto.randomUUID()}.${path.extname(file.name)}`;
+      const name = `${crypto.randomUUID()}${path.extname(file.name)}`;
 
       const data = await file.arrayBuffer();
 
