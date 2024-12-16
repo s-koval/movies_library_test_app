@@ -7,8 +7,6 @@ import initTranslations from "@core/app/i18n";
 
 import TranslationsProvider from "@core/providers/TranslationProvider";
 
-
-
 import EditContent from "./components/EditContent";
 
 type TEditPageProps = TDynamicPageProps;

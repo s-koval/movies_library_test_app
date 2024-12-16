@@ -44,7 +44,7 @@ const HomeHeading: FC = () => {
         >
           {t("title")}
         </Typography>
-        <Link href={`/${params.locale}/create`} variant="text">
+        <Link href={`/${params.locale}/movies/create`} variant="text">
           <Styled.AddIcon size={isTable ? 24 : 32} />
         </Link>
       </Styled.TitleWrapper>

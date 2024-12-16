@@ -10,7 +10,7 @@ import { MovieService } from "@core/services/movie";
 import { errorMiddleware } from "@core/middlewares/error";
 
 import { TAuthRequest, TDynamicSegments } from "@core/types/api";
-import { TMovieUpdateProps } from "@core/types/services/movie";
+import { TMoviesUpdateProps } from "@core/types/services/movie";
 
 const movieService = new MovieService();
 const fileService = new FileService();
@@ -53,7 +53,7 @@ const PUT = async (req: TAuthRequest, segments: TDynamicSegments) => {
     throw new MovieNotFoundError();
   }
 
-  const props: TMovieUpdateProps = {
+  const props: TMoviesUpdateProps = {
     where: {
       id,
     },

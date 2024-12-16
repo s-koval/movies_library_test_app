@@ -42,7 +42,7 @@ const MovieList: FC = () => {
 
   const onMovieClick = useCallback(
     (id: string) => {
-      router.push(`/${params.locale}/edit/${id}`);
+      router.push(`/${params.locale}/movies/edit/${id}`);
     },
     [params, router]
   );

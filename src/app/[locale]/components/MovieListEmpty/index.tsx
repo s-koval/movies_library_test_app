@@ -23,7 +23,7 @@ const MovieListEmpty: FC = () => {
       <Typography component="h2" variant={isTable ? "h3" : "h2"} brightness={0}>
         {t("emptyList")}
       </Typography>
-      <Link href={`/${params.locale}/create`} color="primary">
+      <Link href={`/${params.locale}/movies/create`} color="primary">
         {t("addMovie")}
       </Link>
     </Styled.Wrapper>

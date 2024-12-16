@@ -6,12 +6,11 @@ import { toast } from "react-toastify";
 
 import { useParams, useRouter } from "next/navigation";
 
-import MovieForm from "@core/templates/MovieForm";
+import MovieForm from "@core/app/[locale]/movies/components/MovieForm";
 
 import { useCreateMovieMutation } from "@core/services/api/hooks/mutations/movies/useCreateMovieMutation";
 
 import { TMovieForm } from "@core/types/forms/movies";
-
 
 const CreateMovieForm: FC = () => {
   const params = useParams();

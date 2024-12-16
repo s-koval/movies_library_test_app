@@ -10,7 +10,7 @@ const Form = styled.form(
   display: grid;
   grid-template-columns: 1.31fr 1fr;
   grid-template-rows: min-content 1fr;
-  column-gap: 127px;
+  column-gap: clamp(24px, 11.33vw, 127px);
 
   @media screen and (max-width: 546px) {
     margin-top: ${props.theme.spacing["5xl"]};
