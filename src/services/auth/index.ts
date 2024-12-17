@@ -115,14 +115,14 @@ export class AuthService implements IAuthService {
         ? REFRESH_TOKEN_DEFAULT_EXPIRY * 7
         : REFRESH_TOKEN_DEFAULT_EXPIRY,
       httpOnly: true,
-      secure: true,
+      secure: false,
       sameSite: "strict",
     });
 
     response.cookies.set("accessToken", tokens.accessToken, {
       maxAge: ACCESS_TOKEN_DEFAULT_EXPIRY,
       httpOnly: true,
-      secure: true,
+      secure: false,
       sameSite: "strict",
     });
 
